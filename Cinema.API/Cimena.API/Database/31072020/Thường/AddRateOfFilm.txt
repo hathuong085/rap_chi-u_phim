@@ -1,0 +1,48 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_addrate]    Script Date: 7/31/2020 10:56:54 AM ******/
+DROP PROCEDURE [dbo].[sp_addrate]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_addrate]    Script Date: 7/31/2020 10:56:54 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 31/07/2020
+-- Description:	Add Rate of Film
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_addrate]
+	@FilmId int,
+	@Rate int
+AS
+BEGIN
+	DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again!'
+	if( @Rate>0 and @Rate<=5 and EXISTS(SELECT * FROM Film WHERE FilmId=@FilmId))
+	BEGIN
+			INSERT INTO [dbo].[Rating]
+					   ([FilmId]
+					   ,[Rate])
+				 VALUES
+					   (@FilmId,
+					   @Rate)
+			DECLARE @averagerate float;
+			SELECT @averagerate=CAST(AVG(CAST(Rate AS DECIMAL(10,2))) AS decimal(10,2)) From Rating WHERE FilmId=@FilmId;
+
+
+			UPDATE [dbo].[Film]
+			   SET 
+				  [AverageRate] = @averagerate
+			 WHERE FilmId=@FilmId
+			 SET @Message='Rating  Success!'
+	END
+	Select @FilmId as Film,@Message as [Message]
+END
+GO
+

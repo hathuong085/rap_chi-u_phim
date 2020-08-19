@@ -1,0 +1,42 @@
+﻿
+-- =============================================
+-- Author:		Thường
+-- Create date: 11/08/2020
+-- Description:	Show thông tin(phim đang chiếu,thời gian chiếu,Tỷ lệ ghế của xuất chiếu đó) của 3 phòng phim hiện tại
+-- =============================================
+CREATE Procedure [dbo].[sp_ShowRoomNow]
+	
+AS
+BEGIN
+	select r.RoomId,r.RoomName,r.TotalSeat,
+	isnull(v.NumberChairOn,0) as 'NumberChairOn',
+	(case when isnull(v.NumberChairOn,0)=0 then N'Không chiếu' else N'Đang chiếu' end) as 'Status' 
+	,isnull(v.FilmName,'') as 'FilmName',
+	isnull(v.TimeName,'') as 'TimeName',isnull(v.Dayshow,GETDATE())  as 'Dayshow'
+	from room r left join view_ShowRoomNow v on v.RoomId=r.RoomId
+	order by r.RoomId
+END
+
+
+GO
+-- =============================================
+-- Author:		Thường
+-- Create date: 11/08/2020
+-- Description:	View thông tin(phim đang chiếu,thời gian chiếu,Tỷ lệ ghế của xuất chiếu đó) 
+--của các phòng phim có xuất chiếu hiện tại
+-- =============================================
+
+CREATE VIEW [dbo].[view_ShowRoomNow] AS
+	select r.RoomId,FilmName,t.TimeName,s.Dayshow,(select COUNT(co.SeatId) from ChairOn co where co.ShowingId=s.ShowingId ) as 'NumberChairOn' from Room r inner join TimeShows ts on r.RoomId=ts.RoomId
+						inner join Time t on ts.TimeId=t.TimeId
+						inner join Showing s on s.TimeshowId=ts.TimeshowId
+						inner join Film f on s.FilmId=f.FilmId
+	Where (DAY(s.Dayshow)=DAY(GETDATE()) 
+			and Month(s.Dayshow)=Month(GETDATE()) 
+				and year(s.Dayshow)=year(GETDATE()))
+			and ((DATEPART(HOUR,t.StartTime)=DATEPART(HOUR,GETDATE())
+						and DATEPART(MINUTE,GETDATE())>=DATEPART(MINUTE,t.StartTime))
+				or ( DATEPART(HOUR,GETDATE())-DATEPART(HOUR,t.StartTime) >0
+						and DATEPART(HOUR,GETDATE())-DATEPART(HOUR,t.StartTime)<=2))
+GO
+

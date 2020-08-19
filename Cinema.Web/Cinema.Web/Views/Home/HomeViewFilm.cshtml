@@ -1,0 +1,28 @@
+﻿@using Cinema.Web.Models.Film
+@model int
+@{
+    ViewData["Title"] = ViewBag.Title;
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+    <div class="container">
+
+        <input hidden id="filmid" value="@Model" />
+        <div id="viewfilm" class="row" style="margin-bottom:6px">
+            <div class="col-sm-6" style=" width:400px;height:350px;">
+                <img id="imagefilm" src="" style="width:105%;height:100%; margin-left:-12px" />
+            </div>
+            <div class="col-sm-6 card-body" id="bodyfilm" style="border:0.5px solid">
+
+            </div>
+        </div>
+
+        <div class="text-center">
+            <iframe width="560" height="315" id="linkstrailer" src=""
+                    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        </div>
+    </div>
+@section Scripts{
+    <script src="~/js/homeviewfilm.js" asp-append-version="true"></script>
+}

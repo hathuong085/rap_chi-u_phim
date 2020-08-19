@@ -1,0 +1,123 @@
+﻿@using Cinema.Web.Models.CategoryFilm;
+@model List<Film>
+@{
+    ViewData["Title"] = ViewBag.Title;
+    //Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+    int CateId = ViewBag.CategoryId;
+    CategoryFilm category = ViewBag.Category != null ? ViewBag.Category as CategoryFilm : new CategoryFilm();
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header row py-3">
+        <input hidden value="@CateId" id="CategoryId"/>
+    </div>
+    <div class="card-body">
+        <div class="row form-group" style="padding-left:10px">
+            <div class="ml-auto" style="padding-right:30px">
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">                    
+                    <tr>
+                        <th>Id</th>
+                        <th>Tên phim</th>
+                        <th>Tiêu đề</th>
+                        <th>Đánh giá</th>
+                    </tr>                   
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (Film film in Model)
+                        {
+                            <tr>
+                                <td>@film.FilmId</td>
+                                <td><a href="/Film/FilmShow/@film.FilmId" class="item">@film.FilmName</a></td>
+                                <td>@film.Title</td>
+                                <td>@film.AverageRate</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="addEditFilm" class="modal fade" data-backdrop="false" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <form id="frmAddEditEmployee">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add New Film</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <input hidden id="FilmId" name="FilmId">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row form-group">
+                                <div class="col-12">
+                                    <img src="/images/noavatar.png" id="Image" width="200" height="210" />
+                                    <input type="file" id="FileUpload" class="custom-file" accept="image/*" onchange="film.uploadImage(this)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="row form-group">
+                                <div class="col-3">
+                                    <label>Tên phim</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="FilmName" name="FilmName" class="form-control" data-rule-required="true">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-3">
+                                    <label>Tiêu đề</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="Title" name="Title" class="form-control" data-rule-required="true">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-3">
+                                    <label>Thông tin</label>
+                                </div>
+                                <div class="col-9">
+                                    <textarea cols="100" rows="10" style="width:100%" type="text" id="Description" name="Description" class="form-control" data-rule-required="true"></textarea>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-3">
+                                    <label>Link Trailer</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="Linktrailer" name="Linktrailer" class="form-control" data-rule-required="true">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-3">
+                                    <label>Loại phim</label>
+                                </div>
+                                <div class="col-9">
+                                    <select class="custom-select" id="Category" name="Category">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Đóng</button>
+                    <a href="javascript:;" class="btn btn-danger" onclick="film.create()">Lưu</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/film.js" asp-append-version="true"></script>
+}

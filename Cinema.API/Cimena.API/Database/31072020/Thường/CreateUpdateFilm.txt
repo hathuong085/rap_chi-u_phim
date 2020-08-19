@@ -1,0 +1,97 @@
+﻿-- =============================================
+-- Author:		phap	
+-- Create date: 29/07/2020
+-- Description:	Update film
+-- =============================================
+Create PROCEDURE [dbo].[UpdateFilm] 
+	@FilmId int,
+	@FilmName nvarchar(50),
+	@Title nvarchar(200),
+	@Description nvarchar(Max),
+	@LinkTrailer NVARCHAR(200),
+    @Image NVARCHAR(Max),
+    @CategoryId INT,
+    @AverageRate NVARCHAR(10),
+    @Status BIT
+AS
+BEGIN
+	DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again!'
+	BEGIN TRY
+			if (EXISTS(Select * From [dbo].[Film] where @FilmId=FilmId))
+			BEGIN
+				UPDATE [dbo].[Film]
+				   SET [FilmName] = @FilmName
+					  ,[Title] = @Title
+					  ,[Description] = @Description
+                      ,[LinkTrailer] = @LinkTrailer
+                      ,[Image] = @Image
+                      ,[CategoryId] = @CategoryId
+                      ,[AverageRate] = 0
+                      ,[Status]=1
+					  
+				 WHERE @FilmId=FilmId
+				SET @Message = 'Film has been update successfully!'
+			END
+			SELECT @FilmId AS [FilmId], @Message AS [Message]
+	END TRY
+	BEGIN CATCH
+		SET @FilmId=0;
+		SELECT @FilmId AS [FilmId], @Message AS [Message]
+	END CATCH
+END
+
+
+
+
+-- =============================================
+-- Author:		phap	
+-- Create date: 29/07/2020
+-- Description:	create film
+-- =============================================
+CREATE PROCEDURE [dbo].[CreateFilm] 
+	@FilmId int,
+	@FilmName nvarchar(50),
+	@Title nvarchar(200),
+	@Description nvarchar(Max),
+	@LinkTrailer NVARCHAR(200),
+    @Image NVARCHAR(Max),
+    @CategoryId INT,
+    @AverageRate NVARCHAR(10),
+    @Status BIT
+AS
+BEGIN
+	DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again!'
+	BEGIN TRY
+			IF(@FilmId=0 or @FilmId is null)
+			BEGIN
+			INSERT INTO [dbo].[Film]
+						   ([FilmName]
+						   ,[Title]
+						   ,[Description]
+						   ,[LinkTrailer]
+                           ,[Image]
+                           ,[CategoryId]
+                           ,[AverageRate]
+                           ,[Status])
+					 VALUES
+						   (@FilmName
+						   ,@Title
+						   ,@Description
+						   ,@LinkTrailer
+                           ,@Image
+                           ,@CategoryId
+                           ,0
+                           ,1)
+			Set @FilmId=SCOPE_IDENTITY()
+			SET @Message = 'Film has been Insert successfully!'
+				
+			END
+            SELECT @FilmId AS [FilmId], @Message AS [Message]
+			
+	END TRY
+	BEGIN CATCH
+		SET @FilmId=0;
+		SELECT @FilmId AS [FilmId], @Message AS [Message]
+	END CATCH
+END
+GO

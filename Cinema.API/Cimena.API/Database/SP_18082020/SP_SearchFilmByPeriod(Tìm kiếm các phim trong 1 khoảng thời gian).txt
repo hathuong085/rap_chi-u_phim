@@ -1,0 +1,60 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_SearchFilmByPeriod]    Script Date: 8/18/2020 4:01:12 PM ******/
+DROP PROCEDURE [dbo].[sp_SearchFilmByPeriod]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_SearchDayshowByPeriod]    Script Date: 8/18/2020 4:01:12 PM ******/
+DROP PROCEDURE [dbo].[sp_SearchDayshowByPeriod]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_SearchDayshowByPeriod]    Script Date: 8/18/2020 4:01:12 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Thường Hà
+-- Create date: 17/08/2020
+-- Description:	Tìm kiếm các ngày có xuất chiếu theo 1  khoảng thời gian
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_SearchDayshowByPeriod]
+	@ToDate nvarchar(10),
+	@FromDate nvarchar(10)
+AS
+BEGIN
+	select distinct s.Dayshow as [day]
+	from Showing s 
+	where (s.Dayshow >= CONVERT(datetime,@ToDate) and s.Dayshow <= CONVERT(datetime,@FromDate))
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_SearchFilmByPeriod]    Script Date: 8/18/2020 4:01:12 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Thường Hà
+-- Create date: 17/08/2020
+-- Description:	Tìm kiếm phim theo 1  khoảng thời gian
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_SearchFilmByPeriod]
+	@ToDate nvarchar(10),
+	@FromDate nvarchar(10)
+AS
+BEGIN
+	select distinct F.[FilmId],F.[FilmName],F.[Title],F.[Description],
+	F.[LinkTrailer],F.[Image],F.[CategoryId],F.[Status],F.[AverageRate] 
+	from Showing s inner join Film f on s.FilmId=f.FilmId
+	where (s.Dayshow >= CONVERT(datetime,@ToDate) and s.Dayshow <= CONVERT(datetime,@FromDate))
+END
+GO
+

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimena.API", "Cimena.API\Cimena.API.csproj", "{9581F789-55DD-46FE-90F0-EF17F6322C86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimena.BAL.INTERFACE", "Cimena.BAL.INTERFACE\Cimena.BAL.INTERFACE.csproj", "{B6700AFE-5735-4B33-8B12-0C4C80226129}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimena.BAL", "Cimena.BAL\Cimena.BAL.csproj", "{6006413F-BEC4-4756-A8FD-BBAFDA034A00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimena.DAL.INTERFACE", "Cimena.DAL.INTERFACE\Cimena.DAL.INTERFACE.csproj", "{28FEB633-2427-49E5-B986-9ACA6F3C71FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimena.DAL", "Cimena.DAL\Cimena.DAL.csproj", "{370D80B9-03B1-4D5A-B98F-EB3D83D9DF42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimena.Domain", "Cimena.Domain\Cimena.Domain.csproj", "{D65AD59C-AD46-4FDB-9967-BABB5919CA61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9581F789-55DD-46FE-90F0-EF17F6322C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9581F789-55DD-46FE-90F0-EF17F6322C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9581F789-55DD-46FE-90F0-EF17F6322C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9581F789-55DD-46FE-90F0-EF17F6322C86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6700AFE-5735-4B33-8B12-0C4C80226129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6700AFE-5735-4B33-8B12-0C4C80226129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6700AFE-5735-4B33-8B12-0C4C80226129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6700AFE-5735-4B33-8B12-0C4C80226129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6006413F-BEC4-4756-A8FD-BBAFDA034A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6006413F-BEC4-4756-A8FD-BBAFDA034A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6006413F-BEC4-4756-A8FD-BBAFDA034A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6006413F-BEC4-4756-A8FD-BBAFDA034A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28FEB633-2427-49E5-B986-9ACA6F3C71FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28FEB633-2427-49E5-B986-9ACA6F3C71FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28FEB633-2427-49E5-B986-9ACA6F3C71FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28FEB633-2427-49E5-B986-9ACA6F3C71FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{370D80B9-03B1-4D5A-B98F-EB3D83D9DF42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{370D80B9-03B1-4D5A-B98F-EB3D83D9DF42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{370D80B9-03B1-4D5A-B98F-EB3D83D9DF42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{370D80B9-03B1-4D5A-B98F-EB3D83D9DF42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D65AD59C-AD46-4FDB-9967-BABB5919CA61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D65AD59C-AD46-4FDB-9967-BABB5919CA61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D65AD59C-AD46-4FDB-9967-BABB5919CA61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D65AD59C-AD46-4FDB-9967-BABB5919CA61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8E5AAEB-833C-4F58-ABD2-99DF4F921D46}
+	EndGlobalSection
+EndGlobal

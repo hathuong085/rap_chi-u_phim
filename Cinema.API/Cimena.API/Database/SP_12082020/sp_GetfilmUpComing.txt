@@ -1,0 +1,18 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetfilmUpComing]    Script Date: 8/12/2020 8:23:47 AM ******/
+
+-- =============================================
+-- Author:		Thường
+-- Create date: 10/08/2020
+-- Description:	Lấy ra các phim sắp chiêu của 1 loại phim
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetfilmUpComing]
+	@CateId int
+AS
+BEGIN
+	Select * from Film f where f.Status='false' and f.CategoryId=@CateId
+END
+GO
+

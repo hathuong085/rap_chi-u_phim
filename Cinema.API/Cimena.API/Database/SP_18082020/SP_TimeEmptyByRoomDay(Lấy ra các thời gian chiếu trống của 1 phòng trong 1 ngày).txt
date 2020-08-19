@@ -1,0 +1,37 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_TimeEmptyByRoomDay]    Script Date: 8/18/2020 4:06:16 PM ******/
+DROP PROCEDURE [dbo].[sp_TimeEmptyByRoomDay]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_TimeEmptyByRoomDay]    Script Date: 8/18/2020 4:06:16 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 18/08/2020
+-- Description:	Lấy ra các giờ không có lịch chiếu của 1 phòng phim theo 1 ngày
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_TimeEmptyByRoomDay] 
+	@RoomId int,
+	@Day nvarchar(10)
+AS
+BEGIN
+	
+	select tt.TimeId,tt.TimeName,tt.ShowingNumber from [Time] tt 
+	where tt.ShowingNumber not in (SELECT  distinct t.ShowingNumber
+												FROM  dbo.Room AS r INNER JOIN
+												 dbo.TimeShows AS ts ON r.RoomId = ts.RoomId INNER JOIN
+												 dbo.Time AS t ON ts.TimeId = t.TimeId INNER JOIN
+												 dbo.Showing AS s ON s.TimeshowId = ts.TimeshowId INNER JOIN
+												 dbo.Film AS f ON s.FilmId = f.FilmId
+												Where r.RoomId=@RoomId and s.Dayshow=CONVERT(datetime,@Day))
+END
+GO
+

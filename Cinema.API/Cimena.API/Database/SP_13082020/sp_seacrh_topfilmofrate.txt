@@ -1,0 +1,51 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_Searchfilm]    Script Date: 8/13/2020 10:13:03 PM ******/
+DROP PROCEDURE [dbo].[sp_Searchfilm]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_showfilmByrate]    Script Date: 8/13/2020 10:13:03 PM ******/
+DROP PROCEDURE [dbo].[sp_showfilmByrate]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_showfilmByrate]    Script Date: 8/13/2020 10:13:03 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      phap
+-- Create date: 12/08/2020
+-- Description: show film hot
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_showfilmByrate]
+AS
+BEGIN
+    select top(4) * from Film
+    ORDER BY  AverageRate DESC
+ END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_Searchfilm]    Script Date: 8/13/2020 10:13:03 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      phap
+-- Create date: 13/08/2020
+-- Description: search film
+-- =============================================
+Create PROCEDURE [dbo].[sp_Searchfilm]
+    @key NVARCHAR(100)
+AS
+BEGIN
+    SELECT * from Film WHERE filmname like ('%'+@key+'%')
+END
+GO
+

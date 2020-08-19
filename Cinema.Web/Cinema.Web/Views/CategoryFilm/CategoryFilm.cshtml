@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = ViewBag.Title;
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+<div class="animsition">
+    <div class="table-responsive table--no-card m-b-40">
+        <table id="tbCategoryFilm" class="table table-borderless table-striped table-earning">
+            <thead>
+                <tr>
+                    <th rowspan="2">Id</th>
+                    <th rowspan="2">Thể Loại Phim</th>
+                    <th colspan="3" class="border text-center">Số lượng phim</th>
+                </tr>
+                <tr>
+                    <th class="border-left border-right text-center">Đang chiếu</th>
+                    <th class="text-center">Sắp chiếu</th>
+                    <th class="border-left border-right text-center">Đã chiếu</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/categoryfilm.js" asp-append-version="true"></script>
+}

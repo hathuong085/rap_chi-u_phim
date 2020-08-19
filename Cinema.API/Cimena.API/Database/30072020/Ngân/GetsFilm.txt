@@ -1,0 +1,31 @@
+﻿USE [DatabaseCinema]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_HomeFilms]    Script Date: 7/30/2020 4:44:09 PM ******/
+DROP PROCEDURE [dbo].[sp_HomeFilms]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_HomeFilms]    Script Date: 7/30/2020 4:44:09 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- ================================================
+-- Template generated from Template Explorer using:
+
+-- =============================================
+-- Author:		NPT
+-- Create date: 30/07/2020
+-- Description:movies currently playing or to be shown
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_HomeFilms] 
+AS
+BEGIN
+	select * from Film f 
+	where f.[Status]='false' 
+		or (f.FilmId in (select distinct sw.FilmId from Showing sw))
+END
+GO
+

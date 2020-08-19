@@ -1,0 +1,79 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetAllShowing]    Script Date: 8/18/2020 4:02:37 PM ******/
+DROP PROCEDURE [dbo].[sp_GetAllShowing]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_CreateShowing]    Script Date: 8/18/2020 4:02:37 PM ******/
+DROP PROCEDURE [dbo].[sp_CreateShowing]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_CreateShowing]    Script Date: 8/18/2020 4:02:37 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 18/08/2020
+-- Description:	Thêm xuất chiếu mới
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_CreateShowing]
+	@FilmId int,
+	@TimeId int,
+	@RoomId int
+	,@Dayshow nvarchar(10)
+AS
+BEGIN
+	Declare @Message nvarchar(30)=N'Thêm xuất chiếu thất bại!'
+	Begin try
+		Declare @TimeshowId int=(select ts.TimeshowId from TimeShows ts where ts.RoomId=@RoomId and ts.TimeId=@TimeId )
+		UPDATE [dbo].[Film]
+		   SET [Status] = 1
+		 WHERE FilmId=@FilmId;
+		INSERT INTO [dbo].[Showing]
+				   ([TimeshowId]
+				   ,[FilmId]
+				   ,[MemPriceId]
+				   ,[StatusId]
+				   ,[Dayshow])
+			 VALUES
+				   (@TimeshowId
+				   ,@FilmId
+				   ,1
+				   ,1
+				   ,CONVERT(datetime,@Dayshow))
+
+		set @Message=N'Thêm xuất chiếu thành công!'
+		select SCOPE_IDENTITY() as [ShowingId],@Message as [Message]
+	End Try
+	begin catch
+		select 0 as [ShowingId],@Message as [Message]
+	end catch
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetAllShowing]    Script Date: 8/18/2020 4:02:37 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 17/08/2020
+-- Description:	Lấy ra thông tin tất cả các xuất chiếu
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetAllShowing]
+AS
+BEGIN
+	Select * From View_GetAllShowing v order by v.Dayshow
+END
+GO
+

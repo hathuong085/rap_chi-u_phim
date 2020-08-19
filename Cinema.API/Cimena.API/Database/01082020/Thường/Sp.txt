@@ -1,0 +1,168 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetCategories]    Script Date: 8/1/2020 6:01:06 PM ******/
+DROP PROCEDURE [dbo].[sp_GetCategories]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_DeleteFilm]    Script Date: 8/1/2020 6:01:06 PM ******/
+DROP PROCEDURE [dbo].[sp_DeleteFilm]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetsFilmByCategoryFilmId]    Script Date: 8/1/2020 6:01:06 PM ******/
+DROP PROCEDURE [dbo].[sp_GetsFilmByCategoryFilmId]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetsCategoryFilmByCateFilmId]    Script Date: 8/1/2020 6:01:06 PM ******/
+DROP PROCEDURE [dbo].[sp_GetsCategoryFilmByCateFilmId]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_deleteshowedsByTimes]    Script Date: 8/1/2020 6:01:06 PM ******/
+DROP PROCEDURE [dbo].[sp_deleteshowedsByTimes]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_deleteshowedsByTimes]    Script Date: 8/1/2020 6:01:06 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 01/08/2020
+-- Description:	Chuyển trạng thái xuất chiếu từ đang chiếu "on" đã chiếu "off" 
+--bởi thời gian chiếu trước thời gian hiện tại
+
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_deleteshowedsByTimes]
+AS
+BEGIN
+		UPDATE [dbo].[Showing]
+		   SET [StatusId] = 2
+		 WHERE ShowingId in (select sw.ShowingId from Showing sw INNER JOIN TimeShows ts on ts.TimeshowId=sw.TimeshowId
+											INNER JOIN [Time] t on t.TimeId=ts.TimeId
+				where year(sw.Dayshow)<year(GETDATE())
+				or  Month(sw.Dayshow)<Month(GETDATE()) 
+						and year(sw.Dayshow)=year(GETDATE())
+				or (DAY(sw.Dayshow)<DAY(GETDATE()) 
+					and Month(sw.Dayshow)=Month(GETDATE()) 
+						and year(sw.Dayshow)=year(GETDATE()))
+				or DATEPART(HOUR,t.StartTime)< DATEPART(HOUR,GETDATE())
+					and (DAY(sw.Dayshow)=DAY(GETDATE()) 
+						and Month(sw.Dayshow)=Month(GETDATE()) 
+							and year(sw.Dayshow)=year(GETDATE()))
+				or DATEPART(MINUTE,t.StartTime)< DATEPART(MINUTE,GETDATE())
+					and DATEPART(HOUR,t.StartTime)=DATEPART(HOUR,GETDATE())
+						and (DAY(sw.Dayshow)=DAY(GETDATE()) 
+							and Month(sw.Dayshow)=Month(GETDATE()) 
+								and year(sw.Dayshow)=year(GETDATE()))
+				)
+	SELECT 'Deleted success!' AS [Message]
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetsCategoryFilmByCateFilmId]    Script Date: 8/1/2020 6:01:06 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 29/07/2020
+-- Description: Get category film by CategoryFilmID
+-- =============================================
+Create PROCEDURE [dbo].[sp_GetsCategoryFilmByCateFilmId]
+@CateId int
+AS
+BEGIN
+	SELECT distinct * FROM CategoryFilm
+	WHERE CategoryId=@CateId
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetsFilmByCategoryFilmId]    Script Date: 8/1/2020 6:01:06 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 29/07/2020
+-- Description:	Show Film by CategoryFilmID
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetsFilmByCategoryFilmId]
+@CateId int
+AS
+BEGIN
+	SELECT distinct * FROM Film f
+	WHERE CategoryId=@CateId
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_DeleteFilm]    Script Date: 8/1/2020 6:01:06 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+-- =============================================
+-- Author:		Ngân Bùi
+-- Create date: 31/07/2020
+-- Description:	Delete Film
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_DeleteFilm]
+    @FilmId INT
+AS
+BEGIN
+DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again'
+	BEGIN TRY
+		
+
+	DELETE FROM [dbo].[Film]
+    WHERE @FilmId = FilmId
+
+	SET @Message = 'film has been deleted successfully!'
+	SELECT @FilmId AS FilmId, @Message AS [Message]
+
+
+	END TRY
+	BEGIN CATCH
+		SELECT @FilmId AS FilmId, @Message AS [Message]
+	END CATCH
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetCategories]    Script Date: 8/1/2020 6:01:06 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+-- =============================================
+-- Author:		Ngân Bùi
+-- Create date: 31/07/2020
+-- Description:	Get categories
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetCategories]
+AS
+BEGIN
+	select cf.CategoryId,cf.CategoryName,
+	(select count(*) from Film f where f.CategoryId=cf.CategoryId) as [Count]
+	From CategoryFilm cf
+END
+GO
+

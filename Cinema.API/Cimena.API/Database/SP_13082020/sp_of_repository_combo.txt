@@ -1,0 +1,207 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_RestoreComboFood]    Script Date: 8/13/2020 8:23:18 AM ******/
+DROP PROCEDURE [dbo].[sp_RestoreComboFood]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetAllComboFood]    Script Date: 8/13/2020 8:23:18 AM ******/
+DROP PROCEDURE [dbo].[sp_GetAllComboFood]
+GO
+
+/****** Object:  StoredProcedure [dbo].[InsertEditComboFood]    Script Date: 8/13/2020 8:23:18 AM ******/
+DROP PROCEDURE [dbo].[InsertEditComboFood]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetsComboFood]    Script Date: 8/13/2020 8:23:18 AM ******/
+DROP PROCEDURE [dbo].[GetsComboFood]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetComboFoodById]    Script Date: 8/13/2020 8:23:18 AM ******/
+DROP PROCEDURE [dbo].[GetComboFoodById]
+GO
+
+/****** Object:  StoredProcedure [dbo].[DeleteComboFood]    Script Date: 8/13/2020 8:23:18 AM ******/
+DROP PROCEDURE [dbo].[DeleteComboFood]
+GO
+
+/****** Object:  StoredProcedure [dbo].[DeleteComboFood]    Script Date: 8/13/2020 8:23:18 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      phap
+-- Create date: 30/07/2020
+-- Description: DELETE ComboFood
+-- =============================================
+CREATE PROCEDURE [dbo].[DeleteComboFood]
+    @ComboFoodId int
+AS
+BEGIN
+    DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again!'
+    BEGIN TRY
+            if (EXISTS(Select * From [dbo].[ComboFood] where @ComboFoodId=ComboFoodId))
+            BEGIN
+					UPDATE [dbo].[ComboFood]
+					   SET [IsDelete] = 1
+					 WHERE @ComboFoodId=ComboFoodId
+                    set @Message ='Combo Food has been deleted successfully!'
+            END
+            SELECT @ComboFoodId AS [ComboFoodId], @Message AS [Message]
+    END TRY
+    BEGIN CATCH
+        SET @ComboFoodId=0;
+        SELECT @ComboFoodId AS [ComboFoodId], @Message AS [Message]
+    END CATCH
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetComboFoodById]    Script Date: 8/13/2020 8:23:18 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      phap
+-- Create date: 29/07/2020
+-- Description: Get ComboFood By Id
+-- =============================================
+CREATE PROCEDURE [dbo].[GetComboFoodById]
+    @ComboFoodId INT
+AS
+BEGIN
+    SELECT*FROM ComboFood WHERE @ComboFoodId=ComboFoodId
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetsComboFood]    Script Date: 8/13/2020 8:23:18 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      phap
+-- Create date: 29/07/2020
+-- Description: Gets ComboFood
+-- =============================================
+CREATE PROCEDURE [dbo].[GetsComboFood]
+AS
+BEGIN
+    SELECT ComboFoodId,ComboName,Price,ImageCombo FROM ComboFood Where IsDelete='false'
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[InsertEditComboFood]    Script Date: 8/13/2020 8:23:18 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      phap
+-- Create date: 30/07/2020
+-- Description: Insert Edit ComboFood
+-- =============================================
+CREATE PROCEDURE [dbo].[InsertEditComboFood]
+    @ComboFoodId int,
+    @ComboName nvarchar(100),
+    @Price int,
+	@ImageCombo nvarchar(MAX)
+AS
+BEGIN
+    DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again!'
+    BEGIN TRY
+            IF(@ComboFoodId=0 or @ComboFoodId is null)
+            BEGIN
+            INSERT INTO [dbo].[ComboFood]
+                           ([ComboName]
+                           ,[Price]
+						   ,[ImageCombo]
+						   ,[IsDelete])
+                     VALUES
+                           (@ComboName
+                           ,@Price
+						   ,@ImageCombo
+						   ,0)
+            Set @ComboFoodId=SCOPE_IDENTITY()
+            SET @Message = 'ComboFood has been Insert successfully!'
+            END
+            ELSE if (EXISTS(Select * From [dbo].[ComboFood] where @ComboFoodId=ComboFoodId))
+            BEGIN
+                UPDATE [dbo].[ComboFood]
+                   SET [ComboName] = @ComboName
+                      ,[Price] = @Price
+					  ,[ImageCombo]=@ImageCombo
+                 WHERE @ComboFoodId=ComboFoodId
+                SET @Message = 'Combo Food has been update successfully!'
+            END
+            SELECT @ComboFoodId AS [ComboFoodId], @Message AS [Message]
+    END TRY
+    BEGIN CATCH
+        SET @ComboFoodId=0;
+        SELECT @ComboFoodId AS [ComboFoodId], @Message AS [Message]
+    END CATCH
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetAllComboFood]    Script Date: 8/13/2020 8:23:18 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      phap
+-- Create date: 29/07/2020
+-- Description: Get all ComboFood
+-- =============================================
+create PROCEDURE [dbo].[sp_GetAllComboFood]
+AS
+BEGIN
+    SELECT * FROM ComboFood
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_RestoreComboFood]    Script Date: 8/13/2020 8:23:18 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      Thuong
+-- Create date: 12/08/2020
+-- Description: Restore ComboFood
+-- =============================================
+Create PROCEDURE [dbo].[sp_RestoreComboFood]
+    @ComboFoodId int
+AS
+BEGIN
+    DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again!'
+    BEGIN TRY
+            if (EXISTS(Select * From [dbo].[ComboFood] where @ComboFoodId=ComboFoodId))
+            BEGIN
+					UPDATE [dbo].[ComboFood]
+					   SET [IsDelete] = 0
+					 WHERE @ComboFoodId=ComboFoodId
+                    set @Message ='Combo Food has been restore successfully!'
+            END
+            SELECT @ComboFoodId AS [ComboFoodId], @Message AS [Message]
+    END TRY
+    BEGIN CATCH
+        SET @ComboFoodId=0;
+        SELECT @ComboFoodId AS [ComboFoodId], @Message AS [Message]
+    END CATCH
+END
+GO
+

@@ -1,0 +1,27 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_showupcoming]    Script Date: 7/30/2020 3:28:29 PM ******/
+DROP PROCEDURE [dbo].[sp_showupcoming]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_showupcoming]    Script Date: 7/30/2020 3:28:29 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 30/07/2020
+-- Description:	show all film upcoming movies(các bộ phim sắp ra mắt)
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_showupcoming]
+AS
+BEGIN
+	select * from Film as f where f.[Status]=2; 
+END
+GO
+

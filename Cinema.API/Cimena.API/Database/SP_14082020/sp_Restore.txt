@@ -1,0 +1,35 @@
+﻿USE [MovieDB]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RestoreEventById]    Script Date: 8/14/2020 9:34:14 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Ngân
+-- Create date: 13/08/2020	
+-- Description:	restore Event By EventId
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_RestoreEventById]
+	@EventId int        
+AS
+BEGIN
+DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again!'
+    BEGIN TRY
+            if (EXISTS(Select * From [dbo].[Event] where @EventId=EventId))
+            BEGIN
+					UPDATE [dbo].[Event]
+					   SET [IsDeleted] = 0
+					 WHERE @EventId=EventId
+                    set @Message ='Event has been restore successfully!'
+            END
+            SELECT @EventId AS [EventId], @Message AS [Message]
+    END TRY
+    BEGIN CATCH
+        SET @EventId=0;
+        SELECT @EventId AS [EventId], @Message AS [Message]
+    END CATCH
+END
+
+

@@ -1,0 +1,568 @@
+﻿	USE [MovieDB]
+	GO
+	/****** Object:  Table [dbo].[BookFilm]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[BookFilm](
+		[BookFilmId] [int] IDENTITY(1,1) NOT NULL,
+		[CusId] [int] NOT NULL,
+		[ShowingId] [int] NOT NULL,
+		[OrderId] [int] NULL,
+		[ListChair] [nvarchar](50) NOT NULL,
+		[CountTicket] [int] NOT NULL,
+		[PriceTiket] [int] NOT NULL,
+		[TotalPrice] [int] NOT NULL,
+	 CONSTRAINT [PK_BookFilm] PRIMARY KEY CLUSTERED 
+	(
+		[BookFilmId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[CategoryFilm]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[CategoryFilm](
+		[CategoryId] [int] IDENTITY(1,1) NOT NULL,
+		[CategoryName] [nvarchar](50) NOT NULL,
+	 CONSTRAINT [PK_CategoryFilm] PRIMARY KEY CLUSTERED 
+	(
+		[CategoryId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[ChairOn]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[ChairOn](
+		[ShowingId] [int] NOT NULL,
+		[SeatId] [int] NOT NULL
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[ComboFood]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[ComboFood](
+		[ComboFoodId] [int] IDENTITY(1,1) NOT NULL,
+		[ComboName] [nvarchar](100) NOT NULL,
+		[Price] [int] NOT NULL,
+	 CONSTRAINT [PK_ComboFood] PRIMARY KEY CLUSTERED 
+	(
+		[ComboFoodId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[Customer]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[Customer](
+		[CusId] [int] IDENTITY(1,1) NOT NULL,
+		[Name] [nvarchar](50) NOT NULL,
+		[Mail] [nchar](50) NOT NULL,
+		[PhoneNumber] [nchar](15) NOT NULL,
+	 CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
+	(
+		[CusId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[Film]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[Film](
+		[FilmId] [int] IDENTITY(1,1) NOT NULL,
+		[FilmName] [nvarchar](50) NOT NULL,
+		[Title] [nvarchar](200) NOT NULL,
+		[Description] [nvarchar](max) NULL,
+		[LinkTrailer] [nvarchar](200) NOT NULL,
+		[Image] [nvarchar](max) NOT NULL,
+		[CategoryId] [int] NOT NULL,
+		[Status] [bit] NOT NULL,
+		[AverageRate] [nchar](10) NOT NULL,
+	 CONSTRAINT [PK_Film] PRIMARY KEY CLUSTERED 
+	(
+		[FilmId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[MembershipPrice]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[MembershipPrice](
+		[MemPriceId] [int] IDENTITY(1,1) NOT NULL,
+		[Price] [int] NOT NULL,
+	 CONSTRAINT [PK_MembershipPrice] PRIMARY KEY CLUSTERED 
+	(
+		[MemPriceId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[Order]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[Order](
+		[OrderId] [int] IDENTITY(1,1) NOT NULL,
+		[ComboFoodId] [int] NOT NULL,
+		[Count] [int] NOT NULL,
+		[TotalPrice] [int] NOT NULL,
+	 CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+	(
+		[OrderId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[Rating]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[Rating](
+		[FilmId] [int] NOT NULL,
+		[Rate] [int] NOT NULL
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[Room]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[Room](
+		[RoomId] [int] IDENTITY(1,1) NOT NULL,
+		[RoomName] [nvarchar](20) NOT NULL,
+		[StatusId] [int] NOT NULL,
+		[TotalSeat] [int] NOT NULL,
+	 CONSTRAINT [PK_Room] PRIMARY KEY CLUSTERED 
+	(
+		[RoomId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[Seat]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[Seat](
+		[SeatId] [int] IDENTITY(1,1) NOT NULL,
+		[SeatName] [nchar](10) NOT NULL,
+	 CONSTRAINT [PK_Seat] PRIMARY KEY CLUSTERED 
+	(
+		[SeatId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[Showing]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[Showing](
+		[ShowingId] [int] IDENTITY(1,1) NOT NULL,
+		[TimeshowId] [int] NOT NULL,
+		[FilmId] [int] NOT NULL,
+		[MemPriceId] [int] NOT NULL,
+		[StatusId] [int] NOT NULL,
+		[Dayshow] [datetime] NOT NULL,
+	 CONSTRAINT [PK_Showing] PRIMARY KEY CLUSTERED 
+	(
+		[ShowingId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[Status]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[Status](
+		[StatusId] [int] IDENTITY(1,1) NOT NULL,
+		[StatusName] [nvarchar](10) NOT NULL,
+	 CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED 
+	(
+		[StatusId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[Ticket]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[Ticket](
+		[TicketId] [int] IDENTITY(1,1) NOT NULL,
+		[PriceTicket] [int] NOT NULL,
+	 CONSTRAINT [PK_Ticket] PRIMARY KEY CLUSTERED 
+	(
+		[TicketId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[Time]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[Time](
+		[TimeId] [int] IDENTITY(1,1) NOT NULL,
+		[TimeName] [nchar](15) NOT NULL,
+		[StartTime] [nchar](10) NOT NULL,
+		[ShowingNumber] [int] NOT NULL,
+		[TimeSlot] [int] NOT NULL,
+		[TicketId] [int] NOT NULL,
+	 CONSTRAINT [PK_Time] PRIMARY KEY CLUSTERED 
+	(
+		[TimeId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	/****** Object:  Table [dbo].[TimeShows]    Script Date: 7/30/2020 8:21:42 AM ******/
+	SET ANSI_NULLS ON
+	GO
+	SET QUOTED_IDENTIFIER ON
+	GO
+	CREATE TABLE [dbo].[TimeShows](
+		[TimeshowId] [int] IDENTITY(1,1) NOT NULL,
+		[RoomId] [int] NOT NULL,
+		[TimeId] [int] NOT NULL,
+	 CONSTRAINT [PK_TimeShows] PRIMARY KEY CLUSTERED 
+	(
+		[TimeshowId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+	SET IDENTITY_INSERT [dbo].[CategoryFilm] ON 
+
+	INSERT [dbo].[CategoryFilm] ([CategoryId], [CategoryName]) VALUES (1, N'Phim Hành Động')
+	INSERT [dbo].[CategoryFilm] ([CategoryId], [CategoryName]) VALUES (2, N'Phim Khoa Học Viễn Tưởng')
+	INSERT [dbo].[CategoryFilm] ([CategoryId], [CategoryName]) VALUES (3, N'Phim Hài')
+	INSERT [dbo].[CategoryFilm] ([CategoryId], [CategoryName]) VALUES (4, N'Phim Tình Cảm')
+	INSERT [dbo].[CategoryFilm] ([CategoryId], [CategoryName]) VALUES (5, N'Phim Hoạt Hình')
+	INSERT [dbo].[CategoryFilm] ([CategoryId], [CategoryName]) VALUES (6, N'Phim Kinh Dị')
+	SET IDENTITY_INSERT [dbo].[CategoryFilm] OFF
+	GO
+	SET IDENTITY_INSERT [dbo].[Film] ON 
+
+	INSERT [dbo].[Film] ([FilmId], [FilmName], [Title], [Description], [LinkTrailer], [Image], [CategoryId], [Status], [AverageRate]) VALUES (1, N'Chú Hề Ma Quái', N'chú hề ma quái', N'chú hề rất ma quái', N'http', N'img', 1, 0, N'0         ')
+	INSERT [dbo].[Film] ([FilmId], [FilmName], [Title], [Description], [LinkTrailer], [Image], [CategoryId], [Status], [AverageRate]) VALUES (2, N'Thủy Thủ Mặt Trăng', N'thủy thủ mặt trăng', N'thủy thủ mặt trăng', N'http', N'img', 5, 0, N'0         ')
+	INSERT [dbo].[Film] ([FilmId], [FilmName], [Title], [Description], [LinkTrailer], [Image], [CategoryId], [Status], [AverageRate]) VALUES (3, N'Start World', N'start world', N'start world', N'http', N'img', 2, 0, N'0         ')
+	INSERT [dbo].[Film] ([FilmId], [FilmName], [Title], [Description], [LinkTrailer], [Image], [CategoryId], [Status], [AverageRate]) VALUES (4, N'Mr.Bin', N'mr bin', N'mr bin', N'http', N'img', 3, 0, N'0         ')
+	SET IDENTITY_INSERT [dbo].[Film] OFF
+	GO
+	SET IDENTITY_INSERT [dbo].[MembershipPrice] ON 
+
+	INSERT [dbo].[MembershipPrice] ([MemPriceId], [Price]) VALUES (1, 0)
+	INSERT [dbo].[MembershipPrice] ([MemPriceId], [Price]) VALUES (2, 50000)
+	SET IDENTITY_INSERT [dbo].[MembershipPrice] OFF
+	GO
+	INSERT [dbo].[Rating] ([FilmId], [Rate]) VALUES (1, 4)
+	INSERT [dbo].[Rating] ([FilmId], [Rate]) VALUES (1, 5)
+	INSERT [dbo].[Rating] ([FilmId], [Rate]) VALUES (1, 3)
+	INSERT [dbo].[Rating] ([FilmId], [Rate]) VALUES (2, 1)
+	INSERT [dbo].[Rating] ([FilmId], [Rate]) VALUES (2, 5)
+	INSERT [dbo].[Rating] ([FilmId], [Rate]) VALUES (2, 4)
+	INSERT [dbo].[Rating] ([FilmId], [Rate]) VALUES (3, 4)
+	INSERT [dbo].[Rating] ([FilmId], [Rate]) VALUES (3, 2)
+	INSERT [dbo].[Rating] ([FilmId], [Rate]) VALUES (3, 5)
+	GO
+	SET IDENTITY_INSERT [dbo].[Room] ON 
+
+	INSERT [dbo].[Room] ([RoomId], [RoomName], [StatusId], [TotalSeat]) VALUES (1, N'Room.1', 1, 100)
+	INSERT [dbo].[Room] ([RoomId], [RoomName], [StatusId], [TotalSeat]) VALUES (2, N'Room.2', 1, 100)
+	INSERT [dbo].[Room] ([RoomId], [RoomName], [StatusId], [TotalSeat]) VALUES (3, N'Room.3', 1, 100)
+	SET IDENTITY_INSERT [dbo].[Room] OFF
+	GO
+	SET IDENTITY_INSERT [dbo].[Seat] ON 
+
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (1, N'A0        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (2, N'A1        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (3, N'A2        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (4, N'A3        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (5, N'A4        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (6, N'A5        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (7, N'A6        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (8, N'A7        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (9, N'A8        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (10, N'A9        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (11, N'B0        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (12, N'B1        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (13, N'B2        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (14, N'B3        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (15, N'B4        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (16, N'B5        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (17, N'B6        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (18, N'B7        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (19, N'B8        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (20, N'B9        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (21, N'C0        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (22, N'C1        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (23, N'C2        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (24, N'C3        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (25, N'C4        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (26, N'C5        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (27, N'C6        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (28, N'C7        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (29, N'C8        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (30, N'C9        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (31, N'D0        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (32, N'D1        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (33, N'D2        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (34, N'D3        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (35, N'D4        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (36, N'D5        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (37, N'D6        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (38, N'D7        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (39, N'D8        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (40, N'D9        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (41, N'E0        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (42, N'E1        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (43, N'E2        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (44, N'E3        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (45, N'E4        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (46, N'E5        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (47, N'E6        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (48, N'E7        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (49, N'E8        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (50, N'E9        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (51, N'F0        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (52, N'F1        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (53, N'F2        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (54, N'F3        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (55, N'F4        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (56, N'F5        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (57, N'F6        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (58, N'F7        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (59, N'F8        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (60, N'F9        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (61, N'G0        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (62, N'G1        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (63, N'G2        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (64, N'G3        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (65, N'G4        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (66, N'G5        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (67, N'G6        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (68, N'G7        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (69, N'G8        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (70, N'G9        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (71, N'H0        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (72, N'H1        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (73, N'H2        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (74, N'H3        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (75, N'H4        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (76, N'H5        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (77, N'H6        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (78, N'H7        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (79, N'H8        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (80, N'H9        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (81, N'I0        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (82, N'I1        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (83, N'I2        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (84, N'I3        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (85, N'I4        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (86, N'I5        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (87, N'I6        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (88, N'I7        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (89, N'I8        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (90, N'I9        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (91, N'J0        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (92, N'J1        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (93, N'J2        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (94, N'J3        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (95, N'J4        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (96, N'J5        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (97, N'J6        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (98, N'J7        ')
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (99, N'J8        ')
+	GO
+	INSERT [dbo].[Seat] ([SeatId], [SeatName]) VALUES (100, N'J9        ')
+	SET IDENTITY_INSERT [dbo].[Seat] OFF
+	GO
+	SET IDENTITY_INSERT [dbo].[Showing] ON 
+
+	INSERT [dbo].[Showing] ([ShowingId], [TimeshowId], [FilmId], [MemPriceId], [StatusId], [Dayshow]) VALUES (1, 1, 1, 1, 1, CAST(N'2020-07-29T00:00:00.000' AS DateTime))
+	INSERT [dbo].[Showing] ([ShowingId], [TimeshowId], [FilmId], [MemPriceId], [StatusId], [Dayshow]) VALUES (2, 2, 1, 1, 1, CAST(N'2020-07-30T00:00:00.000' AS DateTime))
+	INSERT [dbo].[Showing] ([ShowingId], [TimeshowId], [FilmId], [MemPriceId], [StatusId], [Dayshow]) VALUES (3, 3, 2, 1, 1, CAST(N'2020-07-27T00:00:00.000' AS DateTime))
+	INSERT [dbo].[Showing] ([ShowingId], [TimeshowId], [FilmId], [MemPriceId], [StatusId], [Dayshow]) VALUES (4, 6, 3, 1, 1, CAST(N'2020-08-01T00:00:00.000' AS DateTime))
+	INSERT [dbo].[Showing] ([ShowingId], [TimeshowId], [FilmId], [MemPriceId], [StatusId], [Dayshow]) VALUES (5, 30, 1, 1, 1, CAST(N'2020-07-29T00:00:00.000' AS DateTime))
+	INSERT [dbo].[Showing] ([ShowingId], [TimeshowId], [FilmId], [MemPriceId], [StatusId], [Dayshow]) VALUES (6, 36, 3, 1, 1, CAST(N'2020-07-29T00:00:00.000' AS DateTime))
+	SET IDENTITY_INSERT [dbo].[Showing] OFF
+	GO
+	SET IDENTITY_INSERT [dbo].[Status] ON 
+
+	INSERT [dbo].[Status] ([StatusId], [StatusName]) VALUES (1, N'On')
+	INSERT [dbo].[Status] ([StatusId], [StatusName]) VALUES (2, N'Off')
+	SET IDENTITY_INSERT [dbo].[Status] OFF
+	GO
+	SET IDENTITY_INSERT [dbo].[Ticket] ON 
+
+	INSERT [dbo].[Ticket] ([TicketId], [PriceTicket]) VALUES (1, 65000)
+	INSERT [dbo].[Ticket] ([TicketId], [PriceTicket]) VALUES (2, 75000)
+	INSERT [dbo].[Ticket] ([TicketId], [PriceTicket]) VALUES (4, 85000)
+	INSERT [dbo].[Ticket] ([TicketId], [PriceTicket]) VALUES (6, 55000)
+	SET IDENTITY_INSERT [dbo].[Ticket] OFF
+	GO
+	SET IDENTITY_INSERT [dbo].[Time] ON 
+
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (1, N'7h00-10h00     ', N'7h00      ', 1, 1, 6)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (2, N'7h20-10h20     ', N'7h20      ', 1, 2, 6)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (3, N'7h45-10h45     ', N'7h45      ', 1, 3, 6)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (4, N'10h15-13h15    ', N'10h15     ', 2, 1, 1)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (5, N'10h35-13h35    ', N'10h35     ', 2, 2, 1)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (6, N'11h00-14h00    ', N'11h00     ', 2, 3, 1)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (7, N'13h30-16h30    ', N'13h30     ', 3, 1, 2)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (9, N'13h50-16h50    ', N'13h50     ', 3, 2, 2)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (10, N'14h15-17h15    ', N'14h15     ', 3, 3, 2)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (11, N'16h45-19h45    ', N'16h45     ', 4, 1, 4)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (12, N'17h05-20h05    ', N'17h05     ', 4, 2, 4)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (13, N'17h30-20h30    ', N'17h30     ', 4, 3, 4)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (14, N'20h00-23h00    ', N'20h00     ', 5, 1, 4)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (15, N'20h20-23h20    ', N'20h20     ', 5, 2, 4)
+	INSERT [dbo].[Time] ([TimeId], [TimeName], [StartTime], [ShowingNumber], [TimeSlot], [TicketId]) VALUES (16, N'20h45-23h45    ', N'20h45     ', 5, 3, 4)
+	SET IDENTITY_INSERT [dbo].[Time] OFF
+	GO
+	SET IDENTITY_INSERT [dbo].[TimeShows] ON 
+
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (1, 1, 1)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (2, 1, 6)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (3, 2, 2)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (6, 2, 5)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (7, 1, 2)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (8, 1, 3)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (9, 1, 4)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (10, 1, 5)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (11, 1, 6)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (12, 1, 7)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (13, 1, 9)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (15, 1, 10)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (17, 1, 11)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (18, 1, 12)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (19, 1, 13)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (20, 1, 14)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (21, 1, 15)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (22, 1, 16)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (23, 2, 1)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (24, 2, 3)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (25, 2, 9)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (26, 2, 4)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (27, 2, 6)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (28, 2, 7)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (29, 2, 9)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (30, 2, 10)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (31, 2, 11)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (32, 2, 12)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (33, 2, 13)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (34, 2, 14)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (35, 2, 15)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (36, 2, 16)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (37, 3, 1)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (38, 3, 2)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (39, 3, 3)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (40, 3, 4)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (41, 3, 5)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (42, 3, 6)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (43, 3, 7)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (44, 3, 9)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (45, 3, 10)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (46, 3, 11)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (47, 3, 12)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (48, 3, 13)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (49, 3, 14)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (50, 3, 15)
+	INSERT [dbo].[TimeShows] ([TimeshowId], [RoomId], [TimeId]) VALUES (51, 3, 16)
+	SET IDENTITY_INSERT [dbo].[TimeShows] OFF
+	GO
+	ALTER TABLE [dbo].[BookFilm]  WITH CHECK ADD  CONSTRAINT [FK_BookFilm_Customer] FOREIGN KEY([CusId])
+	REFERENCES [dbo].[Customer] ([CusId])
+	GO
+	ALTER TABLE [dbo].[BookFilm] CHECK CONSTRAINT [FK_BookFilm_Customer]
+	GO
+	ALTER TABLE [dbo].[BookFilm]  WITH CHECK ADD  CONSTRAINT [FK_BookFilm_Order] FOREIGN KEY([OrderId])
+	REFERENCES [dbo].[Order] ([OrderId])
+	GO
+	ALTER TABLE [dbo].[BookFilm] CHECK CONSTRAINT [FK_BookFilm_Order]
+	GO
+	ALTER TABLE [dbo].[BookFilm]  WITH CHECK ADD  CONSTRAINT [FK_BookFilm_Showing] FOREIGN KEY([ShowingId])
+	REFERENCES [dbo].[Showing] ([ShowingId])
+	GO
+	ALTER TABLE [dbo].[BookFilm] CHECK CONSTRAINT [FK_BookFilm_Showing]
+	GO
+	ALTER TABLE [dbo].[ChairOn]  WITH CHECK ADD  CONSTRAINT [FK_ChairOn_Seat] FOREIGN KEY([SeatId])
+	REFERENCES [dbo].[Seat] ([SeatId])
+	GO
+	ALTER TABLE [dbo].[ChairOn] CHECK CONSTRAINT [FK_ChairOn_Seat]
+	GO
+	ALTER TABLE [dbo].[ChairOn]  WITH CHECK ADD  CONSTRAINT [FK_ChairOn_Showing] FOREIGN KEY([ShowingId])
+	REFERENCES [dbo].[Showing] ([ShowingId])
+	GO
+	ALTER TABLE [dbo].[ChairOn] CHECK CONSTRAINT [FK_ChairOn_Showing]
+	GO
+	ALTER TABLE [dbo].[Film]  WITH CHECK ADD  CONSTRAINT [FK_Film_CategoryFilm] FOREIGN KEY([CategoryId])
+	REFERENCES [dbo].[CategoryFilm] ([CategoryId])
+	GO
+	ALTER TABLE [dbo].[Film] CHECK CONSTRAINT [FK_Film_CategoryFilm]
+	GO
+	ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_ComboFood] FOREIGN KEY([ComboFoodId])
+	REFERENCES [dbo].[ComboFood] ([ComboFoodId])
+	GO
+	ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_ComboFood]
+	GO
+	ALTER TABLE [dbo].[Rating]  WITH CHECK ADD  CONSTRAINT [FK_Rating_Film] FOREIGN KEY([FilmId])
+	REFERENCES [dbo].[Film] ([FilmId])
+	GO
+	ALTER TABLE [dbo].[Rating] CHECK CONSTRAINT [FK_Rating_Film]
+	GO
+	ALTER TABLE [dbo].[Room]  WITH CHECK ADD  CONSTRAINT [FK_Room_Status] FOREIGN KEY([StatusId])
+	REFERENCES [dbo].[Status] ([StatusId])
+	GO
+	ALTER TABLE [dbo].[Room] CHECK CONSTRAINT [FK_Room_Status]
+	GO
+	ALTER TABLE [dbo].[Showing]  WITH CHECK ADD  CONSTRAINT [FK_Showing_Film] FOREIGN KEY([FilmId])
+	REFERENCES [dbo].[Film] ([FilmId])
+	GO
+	ALTER TABLE [dbo].[Showing] CHECK CONSTRAINT [FK_Showing_Film]
+	GO
+	ALTER TABLE [dbo].[Showing]  WITH CHECK ADD  CONSTRAINT [FK_Showing_MembershipPrice] FOREIGN KEY([MemPriceId])
+	REFERENCES [dbo].[MembershipPrice] ([MemPriceId])
+	GO
+	ALTER TABLE [dbo].[Showing] CHECK CONSTRAINT [FK_Showing_MembershipPrice]
+	GO
+	ALTER TABLE [dbo].[Showing]  WITH CHECK ADD  CONSTRAINT [FK_Showing_Status] FOREIGN KEY([StatusId])
+	REFERENCES [dbo].[Status] ([StatusId])
+	GO
+	ALTER TABLE [dbo].[Showing] CHECK CONSTRAINT [FK_Showing_Status]
+	GO
+	ALTER TABLE [dbo].[Showing]  WITH CHECK ADD  CONSTRAINT [FK_Showing_TimeShows] FOREIGN KEY([TimeshowId])
+	REFERENCES [dbo].[TimeShows] ([TimeshowId])
+	GO
+	ALTER TABLE [dbo].[Showing] CHECK CONSTRAINT [FK_Showing_TimeShows]
+	GO
+	ALTER TABLE [dbo].[Time]  WITH CHECK ADD  CONSTRAINT [FK_Time_Ticket] FOREIGN KEY([TicketId])
+	REFERENCES [dbo].[Ticket] ([TicketId])
+	GO
+	ALTER TABLE [dbo].[Time] CHECK CONSTRAINT [FK_Time_Ticket]
+	GO
+	ALTER TABLE [dbo].[TimeShows]  WITH CHECK ADD  CONSTRAINT [FK_TimeShows_Room] FOREIGN KEY([RoomId])
+	REFERENCES [dbo].[Room] ([RoomId])
+	GO
+	ALTER TABLE [dbo].[TimeShows] CHECK CONSTRAINT [FK_TimeShows_Room]
+	GO
+	ALTER TABLE [dbo].[TimeShows]  WITH CHECK ADD  CONSTRAINT [FK_TimeShows_Time] FOREIGN KEY([TimeId])
+	REFERENCES [dbo].[Time] ([TimeId])
+	GO
+	ALTER TABLE [dbo].[TimeShows] CHECK CONSTRAINT [FK_TimeShows_Time]
+	GO
+

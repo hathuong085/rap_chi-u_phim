@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewData["Title"] = ViewBag.Title;
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+    int filmid = ViewBag.FilmId;
+}
+<div id="showfilm" style="border:2px solid">
+    <input hidden id="FilmId" value="@filmid" />
+    <div class="row">
+        <div class="col-sm-6">
+            <img style="padding:15px;width:100%;height:500px" id="Image" src="~/images/avatar-01.jpg"  />
+        </div>
+        <div class="col-sm-6">
+            <div style="padding:50px 5px">
+                <div class="row form-group mt-10 justify-content-center mb-10">
+                    <a href="javascript:;" onclick="film.get()" class="item"><i class="zmdi zmdi-edit" style="font-size:20px"><u> Chỉnh sửa</u></i></a>
+                    <span>&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;</span>
+                    <a href="javascript:;" onclick="film.delete()" class="item"><i style="font-size:20px;color:red" class="zmdi zmdi-delete"><u> Xóa</u></i></a>
+                </div>
+                <div class="row form-group mt-10">
+                    <div class="col-3">
+                        <label style="font-size:20px"><b><i>Tên phim:</i></b></label>
+                    </div>
+                    <div class="col-9" id="FilmName">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-3">
+                        <label style="font-size:20px"><b><i>Tiêu đề:</i></b></label>
+                    </div>
+                    <div class="col-9" id="Title">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-3">
+                        <label style="font-size:20px"><b><i>Thông tin:</i></b></label>
+                    </div>
+                    <div class="col-9" id="Description">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-3">
+                        <label style="font-size:20px"><b><i>Loại phim:</i></b></label>
+                    </div>
+                    <div class="col-9" id="CategoryFilm">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center mt-10">
+    <h2 style="margin:20px">Trailer</h2>
+    <iframe width="1000" height="600" id="trailer" src="" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<!-- Modal -->
+<div id="EditFilm" class="modal fade" data-backdrop="false" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <form id="frmAddEditEmployee">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Film</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row form-group">
+                                <div class="col-12">
+                                    <img src="/images/noavatar.png" id="ImageUd" width="200" height="210" />
+                                    <input type="file" id="FileUpload" class="custom-file" accept="image/*" onchange="film.uploadImage(this)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="row form-group">
+                                <div class="col-3">
+                                    <label>Tên phim</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="FilmNameUd" name="FilmNameUd" class="form-control" data-rule-required="true">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-3">
+                                    <label>Tiêu đề</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="TitleUd" name="TitleUd" class="form-control" data-rule-required="true">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-3">
+                                    <label>Thông tin</label>
+                                </div>
+                                <div class="col-9">
+                                    <textarea cols="100" rows="10" style="width:100%" type="text" id="DescriptionUd" name="DescriptionUd" class="form-control" data-rule-required="true"></textarea>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-3">
+                                    <label>Link Trailer</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="LinktrailerUd" name="LinktrailerUd" class="form-control" data-rule-required="true">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-3">
+                                    <label>Loại phim</label>
+                                </div>
+                                <div class="col-9">
+                                    <select class="custom-select" id="CategoryUd" name="CategoryUd">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Đóng</button>
+                    <a href="javascript:;" class="btn btn-danger" onclick="film.update()">Lưu</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/filmshow.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,223 @@
+﻿@{
+    ViewData["Title"] = ViewBag.Title;
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    List<Film> Films = ViewBag.films;
+}
+
+<article>
+    <header>
+        <div class="liveshow">
+            <img id="img_film" src="images/liveshow/1.jpg" />
+            <div class="backgruond"></div>
+            <div class="name_film">
+                <img onClick="back()" src="images/liveshow/back.png" />
+                <h1 id="name">&nbsp;&nbsp;&nbsp;</h1>
+                <img onClick="next()" src="images/liveshow/next.png" />
+            </div><!--name_film-->
+        </div><!--liveshow-->
+    </header>
+    <section>
+        <div class="content">
+            <div class="showtimes section--product-view" style="margin:50px!important">
+                <div class="container row m-auto">
+                    <div class="col-5 text-right">
+                        <h3 class="js__active">
+                            <a href="#">LỊCH CHIẾU THEO TUẦN</a>
+                        </h3>
+                    </div>
+                    <div class="col-2 text-center">
+                        <h2>|</h2>
+                    </div>
+                    <div class="col-5 text-left">
+                        <h3>
+                            <a href="#">LỊCH CHIẾU THEO NGÀY</a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="nonloop-block-13 owl-carousel" id="bodyhome">
+                        @*slide-1*@
+                        @if (@Films != null)
+                        {
+                            foreach (Film film in Films)
+                            {
+                                <div class="media-image">
+                                    <a href="/Home/Film/@film.FilmId">
+                                        <img src="@film.Image" alt="Image" class="img-fluid" style="width:350px; height:400px">
+                                        <div class="media-image-body" style="text-align:center">
+                                            <h2 class="font-secondary text-uppercase">@film.FilmName</h2>
+                                            <p>@film.Title</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                
+           
+                @*<div class="content">
+                    <div class="left">
+                        <img src="images/index.PNG" />
+                        <h2>PHIM MỚI NHẤT:</h2>
+                        <h3>NGUỒN GỐC NGƯỜI SÓI WOLVERINE </h3>
+                        <p>Phim là phần trước của ba phần X-Men đã phát hành, kể về nhân vật siêu anh hùng Wolverine của Marvel Comics và 20 năm dữ dội trong quá khứ của anh. Đặc biệt là thời điểm trước khi anh gặp được nhóm các nhà khoa học dẫn đầu là tiến sĩ Cornelius và được cấy ghép chất siêu bền Adamantium vào tế bào xương người để có được một bộ khung xương cứng cáp kỳ lạ.</p>
+                        <a href="Phim.html">Chi Tiết</a>
+                    </div>
+                    <div class="right">
+                        <ul id="tin_tuc">
+                            <li style="background-color: #cd2509;" onClick="chon(0)">PHIM MỚI</li>
+                            <li onClick="chon(1)">TIN MỚI</li>
+                            <li onClick="chon(2)">PHIM HAY</li>
+                        </ul>
+                        <div class="over">
+                            <div class="hd">
+                                <div class="danh_sach">
+                                    <div class="tin_phim" style=" padding-top: 0px; margin-top: 0px; border: 0px">
+                                        <img src=images/tin_phim/tin_phim1_1.jpg" />
+                                        <div class="text_new">
+                                            <span>07-07-2017</span>
+                                            <a href="#">Người Nhện Amazing Spider-Man</a>
+                                            <p>Cha mẹ Peter biến mất bí ấn và để cậu cho cô chú nuôi nấng...</p>
+                                            <a href="#" class="chi_tiet"> Xem chi tiết >></a>
+                                        </div>
+                                    </div>
+                                    <div class="tin_phim">
+                                        <img src="images/tin_phim/tin_phim1_2.jpg" />
+                                        <div class="text_new">
+                                            <span>07-09-2017</span>
+                                            <a href="#">Dị nhân: Khải huyền</a>
+                                            <p>X-Men: Apocalypse là bộ phim siêu anh hùng dựa trên X-Men... </p>
+                                            <a href="#" class="chi_tiet"> Xem chi tiết >></a>
+                                        </div>
+                                    </div>
+                                    <div class="tin_phim">
+                                        <img src="images/tin_phim/tin_phim1_3.jpg" />
+                                        <div class="text_new">
+                                            <span>12-02-2017</span>
+                                            <a href="#">BIỆT ĐỘI SIÊU ANH HÙNG 3:</a>
+                                            <p>Tại thời điểm này, thông tin về cốt truyện "Avengers:" ...</p>
+                                            <a href="#" class="chi_tiet"> Xem chi tiết >></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="danh_sach">
+                                    <div class="tin_phim" style=" padding-top: 0px; margin-top: 0px; border: 0px">
+                                        <img src="images/tin_phim/tin_phim2_1.jpg" />
+                                        <div class="text_new">
+                                            <span>12-11-2017</span>
+                                            <a href="#">Spiderman vs Deadpool - sBasketball</a>
+                                            <p>Cuộc chiến của bóng rổ Spiderman vs Deadpool. Ai sẽ là người chiến thắng...</p>
+                                            <a href="#" class="chi_tiet"> Xem chi tiết >></a>
+                                        </div>
+                                    </div>
+                                    <div class="tin_phim">
+                                        <img src="images/tin_phim/tin_phim2_2.jpg" />
+                                        <div class="text_new">
+                                            <span>12-09-2017</span>
+                                            <a href="#">WOLVERINE đại chiến HULK </a>
+                                            <p>Với những fan ruột của Marvel thì những trận đấu giữa Wolverine và Hulk đã không còn xa lạ. </p>
+                                            <a href="#" class="chi_tiet"> Xem chi tiết >></a>
+                                        </div>
+                                    </div>
+                                    <div class="tin_phim">
+                                        <img src="images/tin_phim/tin_phim2_3.jpg" />
+                                        <div class="text_new">
+                                            <span>07-12-2017</span>
+                                            <a href="#">Huỳnh Hiểu Minh - Hứa Văn Cường</a>
+                                            <p>Với nhiều khán giả, hình ảnh kết thúc của bộ phim – Hứa Văn Cường ngã xuống...</p>
+                                            <a href="#" class="chi_tiet"> Xem chi tiết >></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="danh_sach">
+                                    <div class="tin_phim" style=" padding-top: 0px; margin-top: 0px; border: 0px">
+                                        <img src="images/tin_phim/tin_phim3_1.jpg" />
+                                        <div class="text_new">
+                                            <span>12-11-2017</span>
+                                            <a href="#">Songoku vs SuperMan</a>
+                                            <p>Cuộc chiến của Songoku vs SuperMan. Ai sẽ là người chiến thắng...</p>
+                                            <a href="#" class="chi_tiet"> Xem chi tiết >></a>
+                                        </div>
+                                    </div>
+                                    <div class="tin_phim">
+                                        <img src="images/tin_phim/tin_phim3_2.jpg" />
+                                        <div class="text_new">
+                                            <span>12-09-2017</span>
+                                            <a href="#">WOLVERINE đại chiến HULK </a>
+                                            <p>Với những fan ruột của Marvel thì những trận đấu giữa Wolverine và Hulk đã không còn xa lạ. </p>
+                                            <a href="#" class="chi_tiet"> Xem chi tiết >></a>
+                                        </div>
+                                    </div>
+                                    <div class="tin_phim">
+                                        <img src="images/tin_phim/tin_phim3_3.jpg" />
+                                        <div class="text_new">
+                                            <span>07-12-2017</span>
+                                            <a href="#">Huỳnh Hiểu Minh - Hứa Văn Cường</a>
+                                            <p>Với nhiều khán giả, hình ảnh kết thúc của bộ phim – Hứa Văn Cường ngã xuống...</p>
+                                            <a href="#" class="chi_tiet"> Xem chi tiết >></a>
+                                        </div>>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+    </section>
+    <footer>
+        <div class="content">
+            <div class="title">
+                <h3>TOP MOVIES</h3>
+            </div>
+            <!--<next_back>-->
+            <div class="next_back">
+                <input onClick="back_footer()" id="back_footer" type="button" value="<" />
+                <input onClick="next_footer()" id="next_footer" type="button" value=">" />
+            </div>
+            <!--</next_back>-->
+            <div class="liveshow4">
+                <div class="phim">
+                    <img id="f1" src="images/liveshow4/1.jpg" />
+                    <div class="block">
+                        <h3 id="h1">Fast & Furious 7</h3>
+                    </div>
+                </div><!--/phim-->
+                <div class="phim">
+                    <img id="f2" src="images/liveshow4/2.jpg" />
+                    <div class="block">
+                        <h3 id="h2">Hanamichi</h3>
+                    </div>
+                </div><!--/phim-->
+                <div class="phim">
+                    <img id="f3" src="images/liveshow4/3.jpg" />
+                    <div class="block">
+                        <h3 id="h3">Thần Điêu Đại Hiệp</h3>
+                    </div>
+                </div><!--/phim-->
+                <div class="phim" style="margin-right: 0px;">
+                    <img id="f4" src="images/liveshow4/4.jpg" />
+                    <div class="block">
+                        <h3 id="h4">X-MEN WOLVERINE</h3>
+                    </div>
+                </div><!--/phim-->
+            </div><!--</liveshow4>-->
+        </div><!--</content>-->
+    </footer>
+    <div class="share">
+        <div class="fb">
+            <a href="">FACEBOOK</a>
+            <a href="#">ZING ME</a>
+            <a href="#">ZALO</a>
+        </div><!--fb-->
+    </div><!--share-->
+</article>
+
+
+@section Scripts{
+    <script src="~/js/home.js" asp-append-version="true"></script>
+}

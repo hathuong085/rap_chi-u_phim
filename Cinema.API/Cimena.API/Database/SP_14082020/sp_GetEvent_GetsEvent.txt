@@ -1,0 +1,50 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetEventByEventId]    Script Date: 8/14/2020 8:52:07 AM ******/
+DROP PROCEDURE [dbo].[sp_GetEventByEventId]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetEvents]    Script Date: 8/14/2020 8:52:07 AM ******/
+DROP PROCEDURE [dbo].[sp_GetEvents]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetEvents]    Script Date: 8/14/2020 8:52:07 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      Ngân
+-- Create date: 12/08/2020
+-- Description: Get Events
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetEvents]
+AS
+BEGIN
+    SELECT*FROM [Event]
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetEventByEventId]    Script Date: 8/14/2020 8:52:07 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      Ngân
+-- Create date: 12/08/2020
+-- Description: Get Event By EvenId
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetEventByEventId]
+@EventId INT
+AS
+BEGIN
+   SELECT*FROM [dbo].[Event] WHERE @EventId=EventId 
+END
+GO
+

@@ -1,0 +1,15 @@
+﻿
+-- =============================================
+-- Author:		Thường
+-- Create date: 10/08/2020
+-- Description:	Lấy ra các phim đang chiêu của 1 loại phim
+-- =============================================
+Create PROCEDURE [dbo].[sp_GetFilmNowShowing]
+	@CateId int
+AS
+BEGIN
+	Select * from Film f where (f.Status='true' and f.CategoryId=@CateId and
+			EXISTS(Select distinct s.FilmId from Showing s where s.FilmId=f.FilmId and s.StatusId=1) )
+END
+GO
+

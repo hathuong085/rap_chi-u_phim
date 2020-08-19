@@ -1,0 +1,127 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_CreateEvent]    Script Date: 8/14/2020 8:56:50 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Ngân
+-- Create date: 13/08/2020	
+-- Description:	Create Event
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_CreateEvent]
+
+    @NameEvent nvarchar(100)
+    ,@TitleEvent nvarchar(200)
+    ,@ImageEvent nvarchar(max)
+    ,@LinkEvent nvarchar(200)
+
+        
+AS
+BEGIN
+DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again!'
+Declare @EventId int=0
+Begin try
+INSERT INTO [dbo].[Event]
+           ([NameEvent]
+           ,[TitleEvent]
+           ,[ImageEvent]
+           ,[LinkEvent]
+		   ,[IsDeleted])
+     VALUES
+           (@NameEvent
+           ,@TitleEvent
+           ,@ImageEvent
+           ,@LinkEvent
+		   ,0)  
+	set @EventId=SCOPE_IDENTITY()
+	SET @Message = 'Event has been Insert successfully!'
+	 SELECT @EventId AS [EventId], @Message AS [Message]
+end try
+Begin catch
+		SELECT @EventId AS [EventId], @Message AS [Message]
+end catch
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_UpdateEvent]    Script Date: 8/14/2020 8:56:50 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Ngân
+-- Create date: 13/08/2020	
+-- Description:	Update Event
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_UpdateEvent]
+	@EventId int
+    ,@NameEvent nvarchar(100)
+    ,@TitleEvent nvarchar(200)
+    ,@ImageEvent nvarchar(max)
+    ,@LinkEvent nvarchar(200)
+        
+AS
+BEGIN
+DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again!'
+Begin try
+UPDATE [dbo].[Event]
+   SET [NameEvent] = @NameEvent
+      ,[TitleEvent] = @TitleEvent
+      ,[ImageEvent] = @ImageEvent
+      ,[LinkEvent] = @LinkEvent
+	  ,[IsDeleted] = 0
+ WHERE @EventId = EventId
+	SET @Message = 'Event has been Update successfully!'
+	 SELECT @EventId AS [EventId], @Message AS [Message]
+end try
+Begin catch
+		set @EventId=0;
+		SELECT @EventId AS [EventId], @Message AS [Message]
+end catch
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_DeleteEventById]    Script Date: 8/14/2020 8:56:50 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Ngân
+-- Create date: 13/08/2020	
+-- Description:	Delete Event By EventId
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_DeleteEventById]
+	@EventId int        
+AS
+BEGIN
+DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again!'
+    BEGIN TRY
+            if (EXISTS(Select * From [dbo].[Event] where @EventId=EventId))
+            BEGIN
+					UPDATE [dbo].[Event]
+					   SET [IsDeleted] = 1
+					 WHERE @EventId=EventId
+                    set @Message ='Event has been deleted successfully!'
+            END
+            SELECT @EventId AS [EventId], @Message AS [Message]
+    END TRY
+    BEGIN CATCH
+        SET @EventId=0;
+        SELECT @EventId AS [EventId], @Message AS [Message]
+    END CATCH
+END
+GO
+

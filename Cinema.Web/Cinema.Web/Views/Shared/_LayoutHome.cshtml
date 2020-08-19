@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>NPT Cinema Home</title>
+    <link rel="shortcut icon" href="images/icon_title.png" type="image/png">
+    <link href="~/Styles/style.css" type="text/css" rel="stylesheet" />
+    @* ........ *@
+    <link href="~/fonts/icomoon/style.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/css/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/css/animate.css" rel="stylesheet" />
+    <link href="~/fonts/flaticon/font/flaticon.css" rel="stylesheet" />
+    <link href="~/css/mystyle.css" rel="stylesheet" />
+    <link href="~/css/aos.css" rel="stylesheet" />
+    <link href="~/css/style2.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="site-wrap">
+        <header>
+            <div class="top_header">
+                <div class="top">
+                    <div class="account">
+                        <a href="#">ĐĂNG NHẬP</a> |
+                        <a href="#">ĐĂNG KÝ</a>
+                    </div>
+                </div><!--top-->
+            </div><!--top_header-->
+            <div class="content_header">
+                <div class="content">
+                    <div class="logo">
+                        <a href="index.html"><img src="/images/logonptcinema.jpg" /></a>
+                    </div><!--logo-->
+                    <div class="menu">
+                        <nav>
+                            <ul>
+                                <li style="background-color: #da280b; color: #FFF;">
+                                    <a href="index.html" style="color: #FFF; ">TRANG CHỦ</a>
+                                </li>
+                                <li>
+                                    <a href="The_Loai.html">PHIM THEO NGÀY</a>
+                                </li>
+                                <li>
+                                    <a href="Tin_Tuc.html">PHIM THEO</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="CategoryFilm" asp-action="Categoryfilm">QUẢN LÝ</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div><!--menu-->
+                </div><!--content-->
+            </div><!--content_header-->
+        </header>
+
+        <div>
+            @RenderBody()
+        </div>
+
+        <footer>
+            <div class="content_footer">
+                <div class="logo_footer">
+                    <h1>HD Movies</h1>
+                </div>
+                <div class="email">
+                    <ul>
+                        <li>Email       : cinemanpt@gmail.com</li>
+                        <li>Điện thoại  : 0165 342 9433</li>
+                        <li>Fax         : 017 123 7777</li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/scripts.js"></script>
+
+    <script src="~/vendor/jquery-3.2.1.min.js"></script>
+    <script src="~/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.stellar.min.js"></script>
+    <script src="~/js/jquery.waypoints.min.js"></script>
+    <script src="~/js/jquery.animateNumber.min.js"></script>
+    <script src="~/vendor/bootbox/bootbox.js"></script>
+    <script src="~/js/aos.js"></script>
+    <script src="~/js/main2.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

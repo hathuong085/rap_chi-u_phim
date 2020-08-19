@@ -1,0 +1,52 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_Getfilmnew]    Script Date: 8/18/2020 4:04:23 PM ******/
+DROP PROCEDURE [dbo].[sp_Getfilmnew]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetFilmNowComing]    Script Date: 8/18/2020 4:04:23 PM ******/
+DROP PROCEDURE [dbo].[sp_GetFilmNowComing]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetFilmNowComing]    Script Date: 8/18/2020 4:04:23 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Thường
+-- Create date: 10/08/2020
+-- Description:	Lấy ra các phim đang chiếu
+-- =============================================
+Create PROCEDURE [dbo].[sp_GetFilmNowComing]
+AS
+BEGIN
+	Select * from Film f where (f.Status='true' and
+			EXISTS(Select distinct s.FilmId from Showing s where s.FilmId=f.FilmId and s.StatusId=1) )
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_Getfilmnew]    Script Date: 8/18/2020 4:04:23 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Thường
+-- Create date: 19/08/2020
+-- Description:	Lấy ra các phim mới-chưa có xuất chiếu
+-- =============================================
+Create PROCEDURE [dbo].[sp_Getfilmnew]
+AS
+BEGIN
+	Select * from Film f where f.Status='false'
+END
+GO
+

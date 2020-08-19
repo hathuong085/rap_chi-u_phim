@@ -1,0 +1,36 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetFilmOnWeek]    Script Date: 7/30/2020 3:25:37 PM ******/
+DROP PROCEDURE [dbo].[GetFilmOnWeek]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetFilmOnWeek]    Script Date: 7/30/2020 3:25:37 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 30/07/2020
+-- Description:	Get Films on Week
+-- =============================================
+CREATE PROCEDURE [dbo].[GetFilmOnWeek]
+AS
+BEGIN
+	Select f.FilmId,f.FilmName,f.[Image],cf.CategoryName,f.AverageRate from Film f inner join CategoryFilm cf on cf.CategoryId=f.CategoryId
+	inner join Showing sw on f.FilmId=sw.FilmId
+	where (sw.Dayshow in (Select distinct top(7) sw.Dayshow From  Showing sw 
+	where year(sw.Dayshow)>year(GETDATE())
+		or  Month(sw.Dayshow)>Month(GETDATE()) 
+				and year(sw.Dayshow)=year(GETDATE())
+		or (DAY(sw.Dayshow)>=DAY(GETDATE()) 
+			and Month(sw.Dayshow)=Month(GETDATE()) 
+				and year(sw.Dayshow)=year(GETDATE()))
+	Order by sw.Dayshow)) 
+	Group by  f.FilmId,f.FilmName,f.[Image],cf.CategoryName,f.AverageRate
+END
+GO
+

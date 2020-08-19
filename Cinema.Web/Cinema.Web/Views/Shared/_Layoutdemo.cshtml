@@ -1,0 +1,197 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>NPT_Cinema &mdash; WebCinema by NPT</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="images/icon_title.png" type="image/png">
+    <link href="~/Styles/style.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Work+Sans:300,400,700" rel="stylesheet">
+
+    <link href="~/fonts/icomoon/style.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/css/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/css/animate.css" rel="stylesheet" />
+    <link href="~/fonts/flaticon/font/flaticon.css" rel="stylesheet" />
+    <link href="~/css/mystyle.css" rel="stylesheet" />
+    <link href="~/css/aos.css" rel="stylesheet" />
+    <link href="~/css/style2.css" rel="stylesheet" />
+    <link href="~/css/text.css" rel="stylesheet" />
+    @*<link href="~/css/search.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+
+</head>
+<body>
+
+    <div class="site-wrap">
+        <header>
+            <!--top_header-->
+            <div class="content_header fixed-top">
+                <div class="content">
+                    <div class="logo">
+                        <a href="/Management/Index">
+                            <img src="/images/logocine1.jpg" style="width:210px; height:76px; margin-top:-41px;margin-left: -33px" />
+                            <img class="circle-icon-wrap" src="/images/logonho.jpg" style="margin-top:30px; margin-left:-132px" />
+                        </a>
+                    </div><!--logo-->
+                    <div class="menu" style="margin-top:-6px">
+                        <nav>
+                            <ul>
+                                <li style="background-color: #da280b; color: #FFF;">
+                                    <a asp-controller="Home" asp-action="demo" style="color: #FFF; ">TRANG CHỦ</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/Demo">Lịch chiếu theo phim</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/FilmOfDate">Lịch chiếu theo ngày</a>
+                                </li>
+                                <li style="width:300px;border-radius:25px;">
+                                    <input type="text" id="keysearch" oninput="search.drawSearch()" style="width:100%;border-radius:25px;padding-left:20px" placeholder="Tìm kiếm ...">
+                                </li>
+                            </ul>
+                            <ul style="float:right;margin-top:-15px">
+                                <li>
+                                    <a href="#">ĐĂNG NHẬP</a>
+                                </li>
+                                <li>
+                                    <a href="#">ĐĂNG KÝ</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div><!--menu-->
+                </div><!--content-->
+            </div><!--content_header-->
+        </header>
+
+         @*<div class="site-navbar-wrap js-site-navbar bg-white">
+
+                <div class="container">
+                    <nav class="container navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+                        <a class="navbar-brand" href="#">MoMoChan</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="demo">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Index">Film</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="CategoryFilm" asp-action="Categoryfilm">Management</a>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Index">Login</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </nav>
+                </div>
+            </div>*@
+
+        <div style="margin-top:80px">
+@RenderBody()
+</div>
+
+
+<footer class="site-footer bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <h3 class="footer-heading mb-4 text-white">Về Rạp Chiếu Phim</h3>
+                <p>Luôn tổ chức nhiều sự kiện, ưu đãi hấp dẫn cho các bạn đến với rạp phim cũng như các bạn thành viên...!</p>
+                <p><a href="#" class="btn btn-primary text-white px-4">Chi Tiết</a></p>
+            </div>
+            <div class="col-md-5 mb-4 mb-md-0 ml-auto">
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <h3 class="footer-heading mb-4 text-white">NPT_Cinema</h3>
+                        <ul>
+                            <li>Email       : npt_cinema@gmail.com</li>
+                            <li>Điện thoại  : 0165 342 9433</li>
+                            <li>Fax         : 017 123 7777</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <h3 class="footer-heading mb-4 text-white">Ý kiến của khách hàng</h3>
+                        <form action="#" class="d-flex footer-subscribe">
+                            <input type="text" class="form-control rounded-0" placeholder="Nhập ý kiến">
+                            <input type="submit" class="btn btn-primary rounded-0" value="Gửi Đi">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-2">
+
+                <div class="row">
+                    <div class="col-md-12"><h3 class="footer-heading mb-4 text-white">Social Icons</h3></div>
+                    <div class="col-md-12">
+                        <p>
+                            <a href="#" class="pb-2 pr-2 pl-0"><span class="icon-facebook"></span></a>
+                            <a href="#" class="p-2"><span class="icon-twitter"></span></a>
+                            <a href="#" class="p-2"><span class="icon-instagram"></span></a>
+                            <a href="#" class="p-2"><span class="icon-vimeo"></span></a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+            <div class="col-md-12">
+                <p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    NPT_Ciname &copy;
+                    <script>document.write(new Date().getFullYear());</script>
+                    <script>document.write(new Date().getFullYear());</script> Xem là mê | Ăn là phê
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+
+
+            </div>
+
+        </div>
+    </div>
+</footer>
+</div>
+
+
+<script src="~/vendor/jquery-3.2.1.min.js"></script>
+<script src="~/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="~/js/jquery-ui.js"></script>
+<script src="~/js/popper.min.js"></script>
+<script src="~/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/jquery.stellar.min.js"></script>
+<script src="~/js/jquery.waypoints.min.js"></script>
+<script src="~/js/jquery.animateNumber.min.js"></script>
+<script src="~/vendor/bootbox/bootbox.js"></script>
+<script src="~/js/aos.js"></script>
+<script src="~/js/main2.js"></script>
+<script src="~/js/searchkey.js"></script>
+ @*<script src="~/Scripts/scripts.js"></script>*@
+
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>

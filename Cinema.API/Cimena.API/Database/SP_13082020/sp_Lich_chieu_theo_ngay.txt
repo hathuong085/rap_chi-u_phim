@@ -1,0 +1,57 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_Top7DatesShow]    Script Date: 8/13/2020 10:12:13 PM ******/
+DROP PROCEDURE [dbo].[sp_Top7DatesShow]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_FilmOfDate]    Script Date: 8/13/2020 10:12:13 PM ******/
+DROP PROCEDURE [dbo].[sp_FilmOfDate]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_FilmOfDate]    Script Date: 8/13/2020 10:12:13 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Thường Hà
+-- Create date: 13/08/2020
+-- Description:	Lấy ra 7 ngày gần nhất có lịch chiếu
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_FilmOfDate] 
+	@Day nvarchar(20)
+AS
+BEGIN
+	select distinct F.[FilmId],F.[FilmName],F.[Title],F.[Description],
+	F.[LinkTrailer],F.[Image],F.[CategoryId],F.[Status],F.[AverageRate] 
+	from Showing s inner join Film f on s.FilmId=f.FilmId
+	where (YEAR(s.Dayshow)=DATEPART(YEAR,@Day) and 
+			Month(s.Dayshow)=DATEPART(Month,@Day)
+				and Day(s.Dayshow)=DATEPART(Day,@Day))
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_Top7DatesShow]    Script Date: 8/13/2020 10:12:13 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Thường Hà
+-- Create date: 13/08/2020
+-- Description:	Lấy ra 7 ngày gần nhất có lịch chiếu
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Top7DatesShow]
+AS
+BEGIN
+	select top(7) Dayshow as [Day] From View_DatesShow
+END
+GO
+

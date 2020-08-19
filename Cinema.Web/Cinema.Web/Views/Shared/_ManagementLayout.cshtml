@@ -1,0 +1,338 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - Dashboard</title>
+    <link href="~/css/font-face.css" rel="stylesheet" />
+    <link href="~/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="~/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <!-- Bootstrap CSS-->
+    <link href="~/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all" />
+    <!-- Vendor CSS-->
+    <link href="~/vendor/animsition/animsition.min.css" rel="stylesheet" media="all" />
+    <link href="~/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all" />
+    <link href="~/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/vendor/wow/animate.css" rel="stylesheet" media="all" />
+    <link href="~/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all" />
+    <link href="~/vendor/slick/slick.css" rel="stylesheet" />
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet" media="all" />
+    <link href="~/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all" />
+    <link href="~/vendor/vector-map/jqvmap.min.css" rel="stylesheet" media="all" />
+
+    <!-- Main CSS-->
+    <link href="~/css/theme.css" rel="stylesheet" media="all" />
+    <link href="~/css/mystyle.css" rel="stylesheet" />
+</head>
+<body class="animsition">
+    @* bodyyyyy *@
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar2">
+            <div class="logo">
+                <a class="nav-link" asp-controller="Home" asp-action="demo">
+                    <img src="/images/logo.jpg" alt="Cinema_NPTAdmin" class="img-profile rounded-circle" width="50" />
+                </a>
+                <a class="nav-link" asp-controller="Home" asp-action="demo">
+                    <span class="bot-line"></span>NPTAdmin
+                </a>
+            </div>
+            <div class="menu-sidebar2__content js-scrollbar1">
+                <div class="account2">
+                    <div class="image img-cir img-120">
+                        <img src="/images/bap.jpg" alt="John Doe" />
+                    </div>
+                    <h4 class="name">john doe</h4>
+                    <a href="#">Sign out</a>
+                </div>
+                <nav class="navbar-sidebar2">
+                    <ul class="list-unstyled navbar__list">
+                        <li>
+                            <a href="/management/index">
+                                <i class="fa fa-home"></i>Trang chủ
+                            </a>
+                        </li>
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-tachometer-alt"></i>Thể Loại Phim
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list" id="listcategoryfilm1">
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/showing/index">
+                                <i class="fas fa-shopping-basket"></i>Xuất chiếu
+                            </a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-trophy"></i>Đồ ăn
+                            </a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Nhân Viên
+                            </a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Khách hàng
+                            </a>
+                        </li>
+                        <li class="has-sub">
+                            <a asp-controller="Event" asp-action="Index" class="js-arrow">
+                                <i class="fas fa-copy"></i>Sự Kiện
+                            </a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Doanh thu
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+        <!-- PAGE CONTAINER-->
+        <div class="page-container2">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop2">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap2">
+                            <div class="logo d-block d-lg-none">
+                                <a href="#">
+                                    <img src="images/icon/logo-white.png" alt="CoolAdmin" />
+                                </a>
+                            </div>
+                            <div class="header-button2">
+                                <div class="header-button-item js-item-menu">
+                                    <i class="zmdi zmdi-search"></i>
+                                    <div class="search-dropdown js-dropdown">
+                                        <form action="">
+                                            <input class="au-input au-input--full au-input--h65" type="text" placeholder="Search for datas &amp; reports..." />
+                                            <span class="search-dropdown__icon">
+                                                <i class="zmdi zmdi-search"></i>
+                                            </span>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="header-button-item mr-0 js-sidebar-btn">
+                                    <i class="zmdi zmdi-menu"></i>
+                                </div>
+                                <div class="setting-menu js-right-sidebar d-none d-lg-block">
+                                    <div class="account-dropdown__body">
+                                        <div class="account-dropdown__item">
+                                            <a href="#">
+                                                <i class="zmdi zmdi-account"></i>Account
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="account-dropdown__body">
+                                        <div class="account-dropdown__item">
+                                            <a href="#">
+                                                <i class="zmdi zmdi-email"></i>Email
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <aside class="menu-sidebar2 js-right-sidebar d-block d-lg-none">
+                <div class="logo">
+                    <a href="#">
+                        <img src="images/icon/logo-white.png" alt="Cool Admin" />
+                    </a>
+                </div>
+                <div class="menu-sidebar2__content js-scrollbar2">
+                    <div class="account2">
+                        <div class="image img-cir img-120">
+                            <img src="images/icon/avatar-big-01.jpg" alt="John Doe" />
+                        </div>
+                        <h4 class="name">john doe</h4>
+                        <a href="#">Sign out</a>
+                    </div>
+                    <nav class="navbar-sidebar2">
+                        <ul class="list-unstyled navbar__list">
+                            <li>
+                                <a href="/management/index">
+                                    <i class="fa fa-home"></i>Trang chủ
+                                </a>
+                            </li>
+                            <li class="active has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-tachometer-alt"></i>Thể Loại Phim
+                                    <span class="arrow">
+                                        <i class="fas fa-angle-down"></i>
+                                    </span>
+                                </a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list" id="listcategoryfilm2">
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/showing/index">
+                                    <i class="fas fa-shopping-basket"></i>Xuất chiếu
+                                </a>
+                            </li>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-trophy"></i>Đồ ăn
+                                </a>
+                            </li>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-copy"></i>Nhân Viên
+                                </a>
+                            </li>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-copy"></i>Khách hàng
+                                </a>
+                            </li>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-copy"></i>Doanh thu
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+            <!-- END HEADER DESKTOP-->
+            <section class="au-breadcrumb m-t-75">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="au-breadcrumb-content">
+                                    <div class="au-breadcrumb-left">
+                                        <ul class="list-unstyled list-inline au-breadcrumb__list" id="menucus">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END BREADCRUMB-->
+            <section>
+                <div>
+                    @RenderBody()
+                </div>
+            </section>
+            <!-- BREADCRUMB-->
+
+        </div>
+    </div>
+    @* end bodyyyy *@
+
+    <!-- Modal -->
+    <div id="addEditFilm" class="modal fade" data-backdrop="false" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <form id="frmAddEditEmployee">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <input hidden id="FilmId" name="FilmId">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="row form-group">
+                                    <div class="col-12">
+                                        <img src="/images/noimage.jpg" id="Image" width="200" height="210" />
+                                        <input type="file" id="FileUpload" class="custom-file" accept="image/*" onchange="film.uploadImage(this)" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="row form-group">
+                                    <div class="col-3">
+                                        <label>Tên phim</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="text" id="FilmName" name="FilmName" class="form-control" data-rule-required="true">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-3">
+                                        <label>Tiêu đề</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="text" id="Title" name="Title" class="form-control" data-rule-required="true">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-3">
+                                        <label>Thông tin</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <textarea cols="100" rows="10" style="width:100%" type="text" id="Description" name="Description" class="form-control" data-rule-required="true"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-3">
+                                        <label>Link Trailer</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="text" id="Linktrailer" name="Linktrailer" class="form-control" data-rule-required="true">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-3">
+                                        <label>Loại phim</label>
+                                    </div>
+                                    <div class="col-9" id="Category" name="Category">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Đóng</button>
+                        <a href="javascript:;" class="btn btn-danger" onclick="film.create()">Lưu</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="~/vendor/jquery-3.2.1.min.js"></script>
+
+    <!-- Bootstrap JS-->
+    <script src="~/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="~/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+
+    <!-- Vendor JS -->
+    <script src="~/vendor/slick/slick.min.js"></script>
+    <script src="~/vendor/wow/wow.min.js"></script>
+    <script src="~/vendor/animsition/animsition.min.js"></script>
+    <script src="~/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="~/vendor/counter-up/jquery.counterup.min.js"></script>
+    <script src="~/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="~/datatables/jquery.dataTables.js"></script>
+    <script src="~/datatables/dataTables.bootstrap4.js"></script>
+    <script src="~/vendor/circle-progress/circle-progress.js"></script>
+    <script src="~/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <script src="~/js/datatables-demo.js"></script>
+    <script src="~/vendor/bootbox/bootbox.js"></script>
+
+    <!-- Main JS-->
+    <script src="~/js/main.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

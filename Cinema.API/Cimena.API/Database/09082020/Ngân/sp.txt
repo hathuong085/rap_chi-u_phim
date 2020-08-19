@@ -1,0 +1,79 @@
+﻿	USE [DatabaseCinema]
+	GO
+
+	/****** Object:  StoredProcedure [dbo].[DeleteChairOn]    Script Date: 8/9/2020 11:40:06 AM ******/
+	DROP PROCEDURE [dbo].[DeleteChairOn]
+	GO
+
+	/****** Object:  StoredProcedure [dbo].[CreateChairOn]    Script Date: 8/9/2020 11:40:06 AM ******/
+	DROP PROCEDURE [dbo].[CreateChairOn]
+	GO
+
+	/****** Object:  StoredProcedure [dbo].[CreateChairOn]    Script Date: 8/9/2020 11:40:06 AM ******/
+	SET ANSI_NULLS ON
+	GO
+
+	SET QUOTED_IDENTIFIER ON
+	GO
+
+
+	-- =============================================
+	-- Author:		Ngân	
+	-- Create date: 09/08/2020
+	-- Description:	Create Chair On
+	-- =============================================
+	CREATE PROCEDURE  [dbo].[CreateChairOn]
+		@SeatId INT,
+		@ShowingId INT
+	AS
+	BEGIN
+		DECLARE @Message NVARCHAR(200) = N'Ghế bạn chọn đã được sử dụng!'
+		If(NOT EXISTS(SELECT * FROM ChairOn c WHERE c.SeatId=@SeatId and c.ShowingId=@ShowingId))	
+		BEGIN
+				INSERT INTO [dbo].[ChairOn]
+				 ([SeatId]
+				,[ShowingId])
+						 VALUES
+							   (@SeatId                           
+							   ,@ShowingId)
+				SET @Message = N'Thêm ghế thành công!'	
+		END
+		ELSE
+			Set @SeatId=0;
+		SELECT @SeatId AS [SeatId], @Message AS [Message]
+	
+	END
+	GO
+
+	/****** Object:  StoredProcedure [dbo].[DeleteChairOn]    Script Date: 8/9/2020 11:40:07 AM ******/
+	SET ANSI_NULLS ON
+	GO
+
+	SET QUOTED_IDENTIFIER ON
+	GO
+
+
+	-- =============================================
+	-- Author:		Ngân	
+	-- Create date: 09/08/2020
+	-- Description:	delete Chair On
+	-- =============================================
+	CREATE PROCEDURE  [dbo].[DeleteChairOn]
+		@SeatId INT,
+		@ShowingId INT
+	AS
+	BEGIN
+		DECLARE @Message NVARCHAR(200) = N'Xóa ghế thất bại!'
+		If(EXISTS(SELECT * FROM ChairOn c WHERE c.SeatId=@SeatId and c.ShowingId=@ShowingId))	
+		BEGIN
+				DELETE FROM [dbo].[ChairOn]
+					  WHERE SeatId=@SeatId and ShowingId=@ShowingId
+				SET @Message = N'Xóa ghế thành công!'	
+		END
+		ELSE 
+		set @SeatId=0;
+		SELECT @SeatId AS [SeatId], @Message AS [Message]
+	
+	END
+	GO
+

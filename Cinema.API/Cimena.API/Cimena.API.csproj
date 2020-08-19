@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cimena.BAL.INTERFACE\Cimena.BAL.INTERFACE.csproj" />
+    <ProjectReference Include="..\Cimena.BAL\Cimena.BAL.csproj" />
+    <ProjectReference Include="..\Cimena.DAL.INTERFACE\Cimena.DAL.INTERFACE.csproj" />
+    <ProjectReference Include="..\Cimena.DAL\Cimena.DAL.csproj" />
+    <ProjectReference Include="..\Cimena.Domain\Cimena.Domain.csproj" />
+  </ItemGroup>
+
+
+</Project>

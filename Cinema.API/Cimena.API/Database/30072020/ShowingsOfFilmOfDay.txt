@@ -1,0 +1,58 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_ShowingsOfFilmOf1Day]    Script Date: 7/30/2020 3:27:45 PM ******/
+DROP PROCEDURE [dbo].[sp_ShowingsOfFilmOf1Day]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_ShowingsOfFilmOf1Day]    Script Date: 7/30/2020 3:27:45 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 29/07/2020
+-- Description:	Showings of 1 Film ofday
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_ShowingsOfFilmOf1Day] 
+	@FilmId int,
+	@Day datetime,
+	@timeid int
+AS
+BEGIN
+	if(@timeid=null or @timeid=0)
+	Begin
+	SELECT s.ShowingId,s.FilmId,r.RoomId,r.RoomName,r.TotalSeat,t.StartTime,s.Dayshow,tk.PriceTicket,mp.Price FROM  Showing s JOIN TimeShows ts on s.TimeshowId=ts.TimeshowId
+							JOIN MembershipPrice mp on s.MemPriceId=mp.MemPriceId
+							JOIN Room r on ts.RoomId=r.RoomId
+							JOIN [Time] t on t.TimeId=ts.TimeId
+							JOIN Ticket tk on tk.TicketId=t.TicketId
+			WHERE s.FilmId=@FilmId and (DAY(s.Dayshow)=DAY(@day) 
+			and Month(s.Dayshow)=Month(@day) 
+				and year(s.Dayshow)=year(@day))
+				;
+	End
+	Else
+	Begin
+	Declare @time time(7);
+	Select @time=StartTime from [Time] where TimeId=@timeid;
+	Declare @timers time(7)=CONVERT(time(7),@time);
+	SELECT s.ShowingId,s.FilmId,r.RoomId,r.RoomName,r.TotalSeat,Convert(nchar(15),t.StartTime) As StartTime,s.Dayshow,tk.PriceTicket,mp.Price FROM  Showing s JOIN TimeShows ts on s.TimeshowId=ts.TimeshowId
+							JOIN MembershipPrice mp on s.MemPriceId=mp.MemPriceId
+							JOIN Room r on ts.RoomId=r.RoomId
+							JOIN [Time] t on t.TimeId=ts.TimeId
+							JOIN Ticket tk on tk.TicketId=t.TicketId
+			WHERE s.FilmId=@FilmId and (DAY(s.Dayshow)=DAY(@day) 
+			and Month(s.Dayshow)=Month(@day) 
+				and year(s.Dayshow)=year(@day))
+					and DATEPART(HOUR,@timers)=DATEPART(HOUR,t.StartTime)
+						and DATEPART(MINUTE,@timers)=DATEPART(MINUTE,t.StartTime)
+				;
+	End
+END
+GO
+

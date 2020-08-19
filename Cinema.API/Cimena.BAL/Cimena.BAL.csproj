@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cimena.BAL.INTERFACE\Cimena.BAL.INTERFACE.csproj" />
+    <ProjectReference Include="..\Cimena.DAL.INTERFACE\Cimena.DAL.INTERFACE.csproj" />
+  </ItemGroup>
+
+</Project>

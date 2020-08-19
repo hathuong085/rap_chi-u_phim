@@ -1,0 +1,80 @@
+﻿@using Cinema.Web.Models.Room;
+@{ 
+    List<RoomNow> rooms = ViewBag.Rooms;
+}
+<div class="row m-t-25">
+    
+    <div class="col-sm-6 col-lg-3">
+        <div class="overview-item overview-item--c1">
+            <div class="overview__inner">
+                <div class="overview-box clearfix">
+                    <a href="/Categoryfilm/categoryfilm">
+                        <div class="icon">
+                            <i style="margin-top:-20px" class="zmdi zmdi-calendar-note"></i>
+                        </div>
+                        <div class="text">
+                            <h4>Danh mục phim</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="overview-item overview-item--c2">
+            <div class="overview__inner">
+                <div class="overview-box clearfix">
+                    <a href="/Showing/Index">
+                        <div class="icon">
+                            <i style="margin-top:-20px" class="fa fa-desktop"></i>
+                        </div>
+                        <div class="text">
+                            <h4>Xuất chiếu</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="overview-item overview-item--c3">
+            <div class="overview__inner">
+                <a href="/Combofood/index">
+                    <div class="overview-box clearfix">
+                        <div class="icon">
+                            <i style="margin-top:-20px" class="fa fa-utensils"></i>
+                        </div>
+                        <div class="text">
+                            <h4>Đồ ăn</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="overview-item overview-item--c4">
+            <div class="overview__inner">
+                <div class="overview-box clearfix">
+                    <div class="icon">
+                        <i style="margin-top:-20px" class="zmdi zmdi-money"></i>
+                    </div>
+                    <div class="text">
+                        <h4>Doanh thu</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div>
+        <h1 class="text-center"><u><b style="font-family: initial;">Phòng Chiếu Hiện Tại</b></u></h1>
+    </div>
+    <div class="row mt-5" id="chartroom">
+       
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/management.js" asp-append-version="true"></script>
+}

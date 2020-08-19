@@ -1,0 +1,15 @@
+﻿
+-- =============================================
+-- Author:		Thường
+-- Create date: 10/08/2020
+-- Description:	Lấy ra các phim đã chiếu của 1 loại phim
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetFilmScreened]
+	@CateId int
+AS
+BEGIN
+	Select * from Film f where (f.Status='true' and f.CategoryId=@CateId and
+			NOT EXISTS(Select distinct s.FilmId from Showing s where s.FilmId=f.FilmId and s.StatusId=1) )
+END
+GO
+

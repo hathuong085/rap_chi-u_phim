@@ -1,0 +1,66 @@
+﻿USE [DatabaseCinema]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_DeleteFilm]    Script Date: 7/31/2020 5:04:19 PM ******/
+DROP PROCEDURE [dbo].[sp_DeleteFilm]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetCategories]    Script Date: 7/31/2020 5:04:19 PM ******/
+DROP PROCEDURE [dbo].[sp_GetCategories]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetCategories]    Script Date: 7/31/2020 5:04:19 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Ngân Bùi
+-- Create date: 31/07/2020
+-- Description:	Get categories
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetCategories]
+AS
+BEGIN
+	select * From CategoryFilm
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_DeleteFilm]    Script Date: 7/31/2020 5:04:19 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Ngân Bùi
+-- Create date: 31/07/2020
+-- Description:	Delete Film
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_DeleteFilm]
+    @FilmId INT
+AS
+BEGIN
+DECLARE @Message NVARCHAR(200) = 'Something went wrong, please try again'
+	BEGIN TRY
+		
+
+	DELETE FROM [dbo].[Film]
+    WHERE @FilmId = FilmId
+
+	SET @Message = 'film has been deleted successfully!'
+	SELECT @FilmId AS FilmId, @Message AS [Message]
+
+
+	END TRY
+	BEGIN CATCH
+		SELECT @FilmId AS FilmId, @Message AS [Message]
+	END CATCH
+END
+GO
+

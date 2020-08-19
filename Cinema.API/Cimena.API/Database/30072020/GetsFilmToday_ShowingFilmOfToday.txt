@@ -1,0 +1,66 @@
+﻿USE [MovieDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_ShowingsOfFilmToDay]    Script Date: 7/30/2020 9:52:17 AM ******/
+DROP PROCEDURE [dbo].[sp_ShowingsOfFilmToDay]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetsFilmToDay]    Script Date: 7/30/2020 9:52:17 AM ******/
+DROP PROCEDURE [dbo].[sp_GetsFilmToDay]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetsFilmToDay]    Script Date: 7/30/2020 9:52:17 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 29/07/2020
+-- Description:	Show Film on today
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetsFilmToDay]
+AS
+BEGIN
+	SELECT distinct f.FilmId,f.FilmName,f.Title,f.Image,f.LinkTrailer,f.CategoryId FROM Film f JOIN Showing s ON f.FilmId=s.FilmId 
+	WHERE (DAY(s.Dayshow)=DAY(GETDATE()) 
+			and Month(s.Dayshow)=Month(GETDATE()) 
+				and year(s.Dayshow)=year(GETDATE()));
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_ShowingsOfFilmToDay]    Script Date: 7/30/2020 9:52:17 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Hà Thường
+-- Create date: 29/07/2020
+-- Description:	Showings of 1 Film on today
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_ShowingsOfFilmToDay]
+	@FilmId int
+AS
+BEGIN
+	SELECT s.FilmId,r.RoomId,r.RoomName,r.TotalSeat,t.StartTime,s.Dayshow,tk.PriceTicket,mp.Price FROM  Showing s JOIN TimeShows ts on s.TimeshowId=ts.TimeshowId
+							JOIN MembershipPrice mp on s.MemPriceId=mp.MemPriceId
+							JOIN Room r on ts.RoomId=r.RoomId
+							JOIN [Time] t on t.TimeId=ts.TimeId
+							JOIN Ticket tk on tk.TicketId=t.TicketId
+			WHERE s.FilmId=@FilmId and (DAY(s.Dayshow)=DAY(GETDATE()) 
+			and Month(s.Dayshow)=Month(GETDATE()) 
+				and year(s.Dayshow)=year(GETDATE())) 
+				and (DATEPART(HOUR,t.StartTime)>DATEPART(HOUR,GETDATE()) 
+						or (DATEPART(HOUR,t.StartTime)>DATEPART(HOUR,GETDATE())
+							and DATEPART(MINUTE,t.StartTime)>DATEPART(MINUTE,GETDATE()))
+					)
+				;
+END
+GO
+
